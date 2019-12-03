@@ -134,7 +134,7 @@
               </Card:CardView>
             </StackLayout>
 
-            <StackLayout class="p-20" row="2">
+            <StackLayout class="p-20" row="2"  style="margin-bottom:99px">
               <Card:CardView class="cardStyle">
                 <StackLayout class="cardContent">
                   <Label text="Create grabbit games for bitcoin" class="m-b-10 h3" />
@@ -441,13 +441,14 @@
               <Label text="redeem your wins within 72 hours to get perks" class="h4 text-center p-t-20 p-b-20" horizontalAlignment="stretch"></Label>
 
             </StackLayout>
-            <StackLayout orientation="vertical" row="1" *ngIf="WINS &&  WINS.length>0">
+            <StackLayout orientation="vertical" row="1" *ngIf="WINS &&  WINS.length>0 && showRedeem">
 
               <CardView *ngFor="let data of WINS" (tap)="setGameId(data.game)">
                 <StackLayout orientation="horizontal" margin="12" class="text-center">
-                  <GridLayout rows="*,*" columns="*">
+                  <GridLayout rows="*,*,*" columns="*">
                     <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
                     <Label row="1" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
+                    <Button row="2" column="0" text="redeem" width="100" (tap)="onRedeem(data.details.qr)"  *ngIf="data.details.prizeType=='coupon' &&  data.winner.redeemed<1"></Button>
 
                   </GridLayout>
                 </StackLayout>
@@ -455,6 +456,24 @@
               </CardView>
 
             </StackLayout>
+
+            <StackLayout orientation="vertical" row="1" *ngIf="showRedeem">
+
+              <CardView">
+                <StackLayout orientation="horizontal" margin="12" class="text-center">
+                  <GridLayout rows="*,*,*" columns="*">
+
+                    <Label row="0" col="0" text="show this qr code to the  game host, when redeeming your win." class="h4 text-center"></Label>
+                    <Image [src]="redeemQR" margin="12" col="0" row="1"></Image>
+                    <Button row="2" column="0" text="close" width="100" (tap)="showRedeem=false" ></Button>
+
+                  </GridLayout>
+                </StackLayout>
+
+              </CardView>
+
+            </StackLayout>
+
             <StackLayout orientation="vertical" row="1" *ngIf="WINS &&  WINS.length<1">
               <Label text="No Wins Yet" class="h2 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
 

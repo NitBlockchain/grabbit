@@ -18,6 +18,8 @@ var FileSystem = require("file-system");
 var BackgroundHttp = require("nativescript-background-http");
 var MD5 = require("blueimp-md5");
 import { Observable } from "rxjs/Observable";
+import * as dialogs from "tns-core-modules/ui/dialogs";
+import { getUUID } from 'nativescript-uuid';
 
 @Component({
   selector: "Create",
@@ -41,10 +43,12 @@ export class CreateComponent implements AfterViewInit {
 
   gameTitle: string
   maxPlayers: any
-  prize: string
+  prize: any
   prize2: string
   price: string
   details: string
+  gameLat: any
+  gameLng: any
 
   token: string
   name: string
@@ -61,11 +65,12 @@ export class CreateComponent implements AfterViewInit {
   BIZ: any
   USER: any
 
-  btc_value: string
+  btc_value: any
   btc_fee: string
   btc_fee_usd: string
   playerFee: any
 
+  device: any
   constructor(public _game: GameProvider, private zone: NgZone, private cd: ChangeDetectorRef, private location: Location, private router: RouterExtensions, private route: ActivatedRoute, private formBuilder: FormBuilder, ) {
 
     this.$game = _game
@@ -82,7 +87,17 @@ export class CreateComponent implements AfterViewInit {
       this.user = localStorage.getString('user')
       this.lat = localStorage.getString('lat')
       this.lng = localStorage.getString('lng')
+      this.device = getUUID();
+      if (isAndroid) {
+        // console.log("android")
+        // this.device = "android495775qafef4bi9"
 
+      } else {
+        // console.log("ios")
+        //
+        // this.device = "anfeoboeuab30r3u"
+
+      }
       this.showBizForm = false
       this.showGameForm = false
 
@@ -143,7 +158,7 @@ export class CreateComponent implements AfterViewInit {
         });
   }
 
-  gCreate() {
+  gCreateCoupon(type: any) {
 
     if (!this.gameTitle) {
       this.pop("whats the game title?", "error")
@@ -167,7 +182,7 @@ export class CreateComponent implements AfterViewInit {
     } else {
 
       let total = this.maxPlayers * this.playerFee
-      this.$game.gCREATE(this.token, this.user, this.prizeType, this.gameTitle, this.maxPlayers, this.prize, this.prize2, this.price, total)
+      this.$game.gCREATECOUPON(this.token, this.user, this.prizeType, this.gameTitle, this.maxPlayers, this.prize, this.prize2, this.price, total)
         .subscribe(
           (jordi) => {
             if (jordi.success) {
@@ -175,6 +190,41 @@ export class CreateComponent implements AfterViewInit {
               this.pop(jordi.message, "success")
 
             } else {
+              this.pop(jordi.message, "error")
+
+            }
+          })
+
+    }
+
+  }
+
+  gCreateBTC() {
+
+    if (!this.gameTitle) {
+      this.pop("whats the game title?", "error")
+    } else if (!this.prize) {
+      this.pop("whats the  prize?", "error")
+
+    } else if (!this.details) {
+
+      this.pop("whats the prize details?", "error")
+
+    } else if ((this.btc_value * this.prize) > 25) {
+
+      this.pop("$25 max prize value", "error")
+
+    } else {
+
+      this.$game.gCREATEBTC(this.token, this.user, this.gameTitle, this.prize, this.details, this.gameLat, this.gameLng)
+        .subscribe(
+          (jordi) => {
+            if (jordi.success) {
+
+              this.pop(jordi.message, "success")
+
+            } else {
+
               this.pop(jordi.message, "error")
 
             }
@@ -283,6 +333,7 @@ export class CreateComponent implements AfterViewInit {
 
   }
 
+
   public takePicture() {
 
     Camera.takePicture({ saveToGallery: false, width: 320, height: 240 }).then((picture: any) => {
@@ -323,6 +374,118 @@ export class CreateComponent implements AfterViewInit {
         observer.error("Could not upload `" + filepath + "`. " + event.eventName);
       });
     });
+  }
+
+  // --------------------------------------------------------------------
+  // login/register
+
+  login() {
+    console.log("working")
+    dialogs.prompt({
+      title: "Login/Signup",
+      message: "register or login securely  via sms. enter your phone number",
+      okButtonText: "send sms",
+      cancelButtonText: "cancel",
+      inputType: dialogs.inputType.number
+    }).then((r) => {
+      if (r.text) {
+
+        this.$game.login(r.text, this.device, this.lat, this.lng)
+          .subscribe(
+            (jordi: any) => {
+              if (jordi.success) {
+
+                this.zone.run(() => {
+
+                  dialogs.prompt({
+                    title: "verify account",
+                    message: "enter your login code",
+                    okButtonText: "log me in",
+                    cancelButtonText: "cancel",
+                    inputType: dialogs.inputType.text
+                  }).then((r) => {
+                    if (r.text) {
+
+                      this.loginComplete(r.text)
+
+                    } else {
+                      this.pop('what is  your phone number?', 'error')
+                    }
+                    // console.log("Dialog result: " + r.result + ", text: " + r.text);
+
+                  });
+
+                  this.cd.detectChanges();
+
+
+                })
+
+              } else {
+
+              }
+            })
+      } else {
+
+      }
+      // console.log("Dialog result: " + r.result + ", text: " + r.text);
+
+    });
+
+  }
+
+  loginComplete(code: string) {
+
+    this.$game.loginComplete(code, this.device)
+      .subscribe(
+        (jordi: any) => {
+          if (jordi.success) {
+
+            this.zone.run(() => {
+
+              this.token = jordi.token
+              this.user = jordi.user
+              localStorage.setString('token', jordi.token)
+              localStorage.setString('user', jordi.user)
+              this.pop("you are logged in", "success")
+              this.gUSER()
+            });
+
+            this.cd.detectChanges();
+
+
+          } else {
+
+            this.pop(jordi.message, "error")
+            setTimeout(() => {
+
+              this.zone.run(() => {
+
+                dialogs.prompt({
+                  title: "verify account",
+                  message: "enter your login code",
+                  okButtonText: "log me in",
+                  cancelButtonText: "cancel",
+                  inputType: dialogs.inputType.text
+                }).then((r) => {
+                  if (r.text) {
+
+                    this.loginComplete(r.text)
+
+                  } else {
+                    this.pop('what is  your phone number?', 'error')
+                  }
+                  // console.log("Dialog result: " + r.result + ", text: " + r.text);
+
+                });
+
+                this.cd.detectChanges();
+
+
+              })
+            }, 2000)
+
+          }
+        })
   }
 
   public onSelectedIndexChanged(args: EventData) {

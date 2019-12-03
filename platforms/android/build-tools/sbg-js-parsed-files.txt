@@ -1,0 +1,5 @@
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/assets/app/runtime.js
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/assets/app/3.js
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/assets/app/bundle.js
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/assets/app/vendor.js
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/assets/app/tns-java-classes.js

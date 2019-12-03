@@ -124,7 +124,10 @@ export class HomeComponent implements AfterViewInit {
 
   showBuyTools: boolean
   showCreate: boolean
+  showRedeem: boolean
   liveGame: any
+
+  redeemQR: any
 
   buyGrabs = 0
   buySlaps = 0
@@ -135,6 +138,7 @@ export class HomeComponent implements AfterViewInit {
   btc_fee_usd: string
 
   math = Math
+  countryCode: any
 
   constructor(public _game: GameProvider, private zone: NgZone, private cd: ChangeDetectorRef, private router: RouterExtensions, private page: Page) {
 
@@ -214,18 +218,25 @@ export class HomeComponent implements AfterViewInit {
     this.token = localStorage.getString('token')
     this.name = localStorage.getString('name')
     this.user = localStorage.getString('user')
+    this.device = getUUID();
+
+    Telephony().then((resolved: any) => {
+
+      this.countryCode = resolved.countryCode
+    }).catch((error) => {
+
+    })
     if (isAndroid) {
-      console.log("android")
-      this.device = "android495775qafef4bi9"
+      // console.log("android")
+      // this.device = "android495775qafef4bi9"
 
     } else {
-      console.log("ios")
-
-      this.device = "anfeoboeuab30r3u"
+      // console.log("ios")
+      //
+      // this.device = "anfeoboeuab30r3u"
 
     }
 
-    // this.device = getUUID();
 
     if (this.user) {
       console.log("got user id stored")
@@ -482,7 +493,30 @@ export class HomeComponent implements AfterViewInit {
             clearHistory: false
           })
         }, 300);
+      } else if (result == 'privacy policy') {
+
+        setTimeout(() => {
+
+          this.router.navigate(['/legals/privacy'], {
+            animated: true,
+            clearHistory: false
+          })
+        }, 300);
+      } else if (result == 'user agreement') {
+
+        setTimeout(() => {
+
+          this.router.navigate(['/legals/agreement'], {
+            animated: true,
+            clearHistory: false
+          })
+        }, 300);
+      } else if (result == 'how to play') {
+
+        this.pop("slap before you grab, sneak after you grab. Don't let  the timer hit 0, if you are not the one who grabbed the prize. If you get slapped, grab again and again and again. Send us your video explaining how to play and you could win $1,000 in bitcoin videos must be in by 12/30/2019. send youtube link to cs@grabbit.cheap, subject how to play video", 'how to play')
+
       }
+
 
     });
   }
@@ -786,7 +820,7 @@ export class HomeComponent implements AfterViewInit {
 
   login(number: string) {
 
-    this.$game.login(number, this.device, this.lat, this.lng)
+    this.$game.login(number, this.device, this.lat, this.lng, this.countryCode)
       .subscribe(
         (jordi: any) => {
           if (jordi.success) {
@@ -884,6 +918,17 @@ export class HomeComponent implements AfterViewInit {
     SocialShare.shareUrl("https://www.nativescript.org/", "come play grabbit with me, we can win awesome prizes");
   }
 
+  onRedeem(qr) {
+
+    this.zone.run(() => {
+
+      this.redeemQR = qr
+      this.showRedeem = true
+
+      this.cd.detectChanges();
+
+    })
+  }
   // --------------------------------------------------------------------
   // User Interaction
 
@@ -1086,12 +1131,18 @@ export class HomeComponent implements AfterViewInit {
   }
   ngOnDestroy() {
 
-    this.runTimer = false
-    if (this.OTIMER) {
+    this.zone.run(() => {
 
-      timer.clearTimeout(this.OTIMER);
+      this.runTimer = false
+      if (this.OTIMER) {
 
-    }
+        timer.clearTimeout(this.OTIMER);
+
+      }
+      this.cd.detectChanges();
+
+    })
+
 
   }
 }

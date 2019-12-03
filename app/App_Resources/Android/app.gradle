@@ -5,12 +5,12 @@
 //	compile 'com.android.support:recyclerview-v7:+'
 //}
 
-android {  
+android {
   defaultConfig {  
     generatedDensities = []
-    applicationId = "__PACKAGE__"  
-  }  
-  aaptOptions {  
-    additionalParameters "--no-version-vectors"  
-  }  
-} 
+    applicationId = "grabbit.cheap"
+  }
+  aaptOptions {
+    additionalParameters "--no-version-vectors"
+  }
+}

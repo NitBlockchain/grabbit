@@ -30,22 +30,7 @@
 
         </GridLayout>
       </StackLayout>
-      <StackLayout row="3" *ngIf="bType=='sex'">
-        <GridLayout rows="*, auto, auto">
-            <ListView [items]="imageAssets" *ngIf="imageAssets && imageAssets.length>0">
-                <ng-template let-image="item" let-i="index">
-                    <GridLayout columns="auto, *">
-                        <Image
-                            [width]="thumbSize"
-                            [height]="thumbSize"
-                            [src]="image" stretch="aspectFill"></Image>
-                        <Label col="1" [text]="'image ' + i"></Label>
-                    </GridLayout>
-                </ng-template>
-            </ListView>
-            <Button row="2" text="save" (tap)="save()" horizontalAlignment="center" class="-primary"></Button>
-        </GridLayout>
-      </StackLayout>
+
     </GridLayout>
   </GridLayout>
 
@@ -77,7 +62,7 @@
           <TextField row="4" col="1" [(ngModel)]="price" hint="buy $30 item" class="input input-border p-t-20"  maxLength="24" *ngIf="prizeType=='free item  with  purchase'"></TextField>
           <TextField row="5" col="1" [(ngModel)]="details" hint="prize details" class="input input-border p-t-20"  maxLength="150"></TextField>
 
-          <Button row="6" col='1' text="create game" (tap)="gCreate()" horizontalAlignment="stretch" class="-primary p-b-20"></Button>
+          <Button row="6" col='1' text="create local game" (tap)="gCreateCoupon()" horizontalAlignment="stretch" class="-primary p-b-20"></Button>
 
         </GridLayout>
       </StackLayout>
@@ -211,8 +196,32 @@
         <GridLayout rows="*,*" columns="*">
           <StackLayout orientation="vertical" row="0">
 
-            <Label text="creating bitcoin game" class="h3 text-center p-t-20 p-b-20" horizontalAlignment="stretch"></Label>
+              <GridLayout rows="*, *, *, *, *,*,*" columns="80, *, 80" class="form">
+
+                <TextField row="0" col="1" [(ngModel)]="gameTitle" hint="game title" class="input input-border p-t-20" maxLength="24"></TextField>
+                <TextField row="1" col="1" [(ngModel)]="prize" hint="prize in btc (.001)" class="input input-border p-t-20" keyboardType="number" maxLength="6"></TextField>
+                <TextField row="2" col="1" [(ngModel)]="details" hint="prize details" class="input input-border p-t-20"  maxLength="150"></TextField>
+                <TextField row="3" col="1" [(ngModel)]="gameLat" hint="geo fence to latitude" class="input input-border p-t-20"  maxLength="150" *ngIf="admin>0"></TextField>
+                <TextField row="4" col="1" [(ngModel)]="gameLng" hint="geo fence to longitude" class="input input-border p-t-20"  maxLength="150" *ngIf="admin>0"></TextField>
+
+                <Button row="5" col='1' text="create bitcoin game" (tap)="gCreateBTC()" horizontalAlignment="stretch" class="-primary p-b-20" *ngIf="user"></Button>
+                <Button row="5" col='1' text="login/signup" (tap)="login()" horizontalAlignment="stretch" class="-primary p-b-20" *ngIf="!user"></Button>
+
+              </GridLayout>
           </StackLayout>
+
+          <StackLayout orientation="vertical" row="1" backgroundColor="#F1F1F1">
+            <Label text="prize value: ${{btc_value*prize || 0 | number : '1.2-2'}}" class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true" *ngIf="user"></Label>
+
+            <Label text="How This works" class="h2 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
+            <Label text="When you create a bitcoin game, you are offering $5 in bitcoin (for example) as a prize up for grabs. Your game will require a minimum of 10 players, with a play fee of 2 grabs (or $0.50). Like inserting quarters into an arcade. Players get x number of free grabs, slaps and sneaks to play" class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true" lineHeight="18"></Label>
+
+            <Label text="10 x  $0.50 covers your $5 in bitcoin. If 20 players join the game,  there's an overage of $5. 75% of that is yours. " class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true" lineHeight="18"></Label>
+            <Label text="If your game is not successful, cancel it and your bitcoins are sent back to your wallet." class="h3 text-center p-t-10" horizontalAlignment="stretch" textWrap="true" lineHeight="18"></Label>
+            <Label text="max players 25, max prize amount $25" class="h3 text-center p-t-10" horizontalAlignment="stretch" textWrap="true" lineHeight="18"></Label>
+
+          </StackLayout>
+
         </GridLayout>
       </StackLayout>
     </GridLayout>

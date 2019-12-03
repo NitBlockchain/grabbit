@@ -251,12 +251,13 @@ export class GameProvider {
       .catch(this.handleError);
   }
 
-  login(number: string, device: string, lat: string, lng: string) {
+  login(number: string, device: string, lat: string, lng: string, countryCode) {
     let DATA = {
       number: number,
       device: device,
       lat: lat,
-      lng: lng
+      lng: lng,
+      countryCode: countryCode
     }
 
     const httpOptions = {
@@ -325,7 +326,7 @@ export class GameProvider {
       .catch(this.handleError);
   }
 
-  gCREATE(token: string, user: string, prizeType: string, gameTitle: string, maxPlayers: any, prize: string, prize2: string, price: any, total: any) {
+  gCREATECOUPON(token: string, user: string, prizeType: string, gameTitle: string, maxPlayers: any, prize: string, prize2: string, price: any, total: any) {
     let DATA = {
       user: user,
       token: token,
@@ -345,6 +346,29 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/gCreate', DATA, httpOptions)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+
+  gCREATEBTC(token: string, user: string, gameTitle: string, prize: string, details: any, lat: any, lng: any) {
+    let DATA = {
+      user: user,
+      token: token,
+      gameTitle: gameTitle,
+      prize: prize,
+      details: details,
+      lat: lat,
+      lng: lng
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('https://app.grabbit.cheap/gCreateBTC', DATA, httpOptions)
       .map(this.extractData)
       .catch(this.handleError);
   }
