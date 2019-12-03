@@ -320,7 +320,7 @@ core_1.ElementRef*vendor*170059*28*ListItemContext****
 com.google.android.gms.location.LocationCallback*vendor*170615*77**onLocationResult***
 geolocation_common_1.LocationBase*vendor*170872*28*Location****
 cardview_common_1.CardViewCommon*vendor***CardView*,,,createNativeView,initNativeView,,***
-SwipeRefreshLayout_Namespace.SwipeRefreshLayout*vendor*171001*28*CarouselFriendlySwipeRefreshLayout*onInterceptTouchEvent***
+SwipeRefreshLayout_Namespace.SwipeRefreshLayout*vendor*171069*28*CarouselFriendlySwipeRefreshLayout*onInterceptTouchEvent***
 pulltorefresh_common_1.PullToRefreshBase*vendor***PullToRefresh*createNativeView,initNativeView,disposeNativeView,,,,***
 android.view.View.OnLayoutChangeListener*vendor*67307*70**onLayoutChange***
 android.view.ViewTreeObserver.OnGlobalLayoutListener*vendor*89965*41**onGlobalLayout***
@@ -369,4 +369,4 @@ com.telerik.widget.dataform.engine.PropertyConverter*vendor*164948*36**convertTo
 com.telerik.widget.dataform.visualization.editors.DataFormCustomEditor.DataFormCustomEditorProvider*vendor*165460*40**createView,applyValueToEditor,getValue***
 com.google.android.gms.tasks.OnSuccessListener*vendor*170675*12**onSuccess***
 com.google.android.gms.tasks.OnFailureListener*vendor*170680*12**onFailure***
-androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener*vendor*171043*36**onRefresh***
+androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener*vendor*171111*36**onRefresh***

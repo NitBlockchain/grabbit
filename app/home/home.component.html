@@ -5,7 +5,11 @@
   </ActionItem>
 
   <ActionItem (tap)="onPlay()" ios.position="right" text="Play" *ngIf="currentTabIndex==2  && !USERINGAME"></ActionItem>
-  <ActionItem (tap)="onShare()" ios.position="right" text="Grab Friends" *ngIf="currentTabIndex==2  && USERINGAME"></ActionItem>
+  <ActionItem (tap)="onShare()" ios.position="right" text="Grab Friends" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.grabs>0"></ActionItem>
+  <ActionItem (tap)="onReload(1)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.grabs<1 && USERINGAME.slaps>0 && USERINGAME.sneaks>0"></ActionItem>
+  <ActionItem (tap)="onReload(2)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.slaps<1 && USERINGAME.grabs>0 && USERINGAME.sneaks>0"></ActionItem>
+    <ActionItem (tap)="onReload(3)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.sneaks<1 && USERINGAME.grabs>0 && USERINGAME.slaps>0"></ActionItem>
+
   <ActionItem (tap)="onEdit()" ios.position="right" text="Edit" *ngIf="currentTabIndex==3  && user"></ActionItem>
   <ActionItem (tap)="onType('local')" ios.position="right" text="Local Games" *ngIf="currentTabIndex==1 && $gType=='global'"></ActionItem>
   <ActionItem (tap)="onType('global')" ios.position="right" text="Global Games" *ngIf="currentTabIndex==1 && $gType=='local'"></ActionItem>
@@ -459,7 +463,7 @@
 
             <StackLayout orientation="vertical" row="1" *ngIf="showRedeem">
 
-              <CardView">
+              <CardView>
                 <StackLayout orientation="horizontal" margin="12" class="text-center">
                   <GridLayout rows="*,*,*" columns="*">
 

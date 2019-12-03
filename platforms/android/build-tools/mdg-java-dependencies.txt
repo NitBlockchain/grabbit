@@ -1,4 +1,4 @@
-/usr/local/share/android-sdk/platforms/android-28/android.jar
+/Users/owoman/Library/Android/sdk/platforms/android-28/android.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/3d657633319d64cc9474e2150ddeac2a/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/dbdf35452a786007ba9746942bce286a/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/3c1ee392384e8f190ec5fc87b7b7a10a/classes.jar

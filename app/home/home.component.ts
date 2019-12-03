@@ -223,6 +223,7 @@ export class HomeComponent implements AfterViewInit {
     Telephony().then((resolved: any) => {
 
       this.countryCode = resolved.countryCode
+      this.pop(this.countryCode, 'success')
     }).catch((error) => {
 
     })
@@ -928,6 +929,31 @@ export class HomeComponent implements AfterViewInit {
       this.cd.detectChanges();
 
     })
+  }
+
+  onReload(type: any) {
+
+
+    this.$game.reload(this.token, this.user, this.$gID, type)
+      .subscribe(
+        (jordi: any) => {
+          if (jordi.success) {
+
+            this.zone.run(() => {
+              this.message = 'reloaded'
+            });
+
+          } else {
+
+            this.message = jordi.message
+
+          }
+        })
+
+
+
+    this.cd.detectChanges();
+
   }
   // --------------------------------------------------------------------
   // User Interaction

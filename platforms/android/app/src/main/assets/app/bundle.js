@@ -52,7 +52,7 @@ var core = __webpack_require__(1);
 var nativescript_module = __webpack_require__(292);
 
 // EXTERNAL MODULE: ../node_modules/@angular/common/fesm5/http.js
-var http = __webpack_require__(11);
+var http = __webpack_require__(12);
 
 // CONCATENATED MODULE: ./app.component.ts
 
@@ -901,7 +901,7 @@ var legals_component_LegalsComponent = /** @class */ (function () {
 
 var routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
-    { path: "home", loadChildren: function () { return Promise.all(/* import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, 478)).then(function (m) { return m.HomeModule; }); } },
+    { path: "home", loadChildren: function () { return Promise.all(/* import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, 479)).then(function (m) { return m.HomeModule; }); } },
     { path: "about", component: about_component_AboutComponent },
     { path: "create/:type", component: create_component_CreateComponent },
     { path: "create-business", component: create_business_component_CreateBusinessComponent },
@@ -983,7 +983,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(296);
 
-        let applicationCheckPlatform = __webpack_require__(12);
+        let applicationCheckPlatform = __webpack_require__(11);
         if (applicationCheckPlatform.android && !global["__snapshot"]) {
             __webpack_require__(54);
 __webpack_require__(359);
@@ -1095,7 +1095,7 @@ module.exports = ".home-panel{\n    vertical-align: center;\n    font-size: 20;\
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameProvider; });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(98);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 
 
@@ -1306,12 +1306,13 @@ var GameProvider = /** @class */ (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    GameProvider.prototype.login = function (number, device, lat, lng) {
+    GameProvider.prototype.login = function (number, device, lat, lng, countryCode) {
         var DATA = {
             number: number,
             device: device,
             lat: lat,
-            lng: lng
+            lng: lng,
+            countryCode: countryCode
         };
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__[/* HttpHeaders */ "c"]({

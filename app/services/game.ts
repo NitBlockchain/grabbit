@@ -41,6 +41,25 @@ export class GameProvider {
       .catch(this.handleError);
   }
 
+  reload(token: any, user: any, gID: any, type: any) {
+    let DATA = {
+      token: token,
+      user: user,
+      gID: gID,
+      type: type
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('https://app.grabbit.cheap/reload', DATA, httpOptions)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   bGLOBALGAMES() {
     let DATA = {
       token: null,
