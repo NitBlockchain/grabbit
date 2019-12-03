@@ -10,6 +10,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AboutComponent } from "./about/about.component"
 import { CreateComponent } from "./create/create.component"
 import { CreateBusinessComponent } from "./create-business/create-business.component"
+import { SupportComponent } from "./support/support.component"
+import { LegalsComponent } from "./legals/legals.component"
+
 @NgModule({
 
   bootstrap: [
@@ -26,7 +29,9 @@ import { CreateBusinessComponent } from "./create-business/create-business.compo
     AppComponent,
     AboutComponent,
     CreateComponent,
-    CreateBusinessComponent
+    CreateBusinessComponent,
+    SupportComponent,
+    LegalsComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

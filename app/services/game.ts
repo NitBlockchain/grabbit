@@ -41,6 +41,42 @@ export class GameProvider {
       .catch(this.handleError);
   }
 
+  bGLOBALGAMES() {
+    let DATA = {
+      token: null,
+      user: null,
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('https://app.grabbit.cheap/bGLOBALGAMES', DATA, httpOptions)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  bLOCALGAMES(token, user, lat, lng) {
+    let DATA = {
+      token: token,
+      user: user,
+      lat: lat,
+      lng: lng
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('https://app.grabbit.cheap/bLOCALGAMES', DATA, httpOptions)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
   ////business
   bizSAVE(token: string, user: string, bizname: string, address: string, phone: string, story: string, email: string, bType: string, lat: any, lng: any) {
     let DATA = {

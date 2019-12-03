@@ -7,7 +7,7 @@ var routes = [
     { path: "home", loadChildren: function () { return Promise.resolve().then(function () { return require("./home/home.module"); }).then(function (m) { return m.HomeModule; }); } },
     { path: "about", loadChildren: function () { return Promise.resolve().then(function () { return require("./about/about.module"); }).then(function (m) { return m.AboutModule; }); } },
     { path: "chat", loadChildren: function () { return Promise.resolve().then(function () { return require("./chat/chat.module"); }).then(function (m) { return m.ChatModule; }); } },
-    { path: "legals", loadChildren: function () { return Promise.resolve().then(function () { return require("./legals/legals.module"); }).then(function (m) { return m.LegalsModule; }); } },
+    { path: "legals/:type", loadChildren: function () { return Promise.resolve().then(function () { return require("./legals/legals.module"); }).then(function (m) { return m.LegalsModule; }); } },
     { path: "support", loadChildren: function () { return Promise.resolve().then(function () { return require("./support/support.module"); }).then(function (m) { return m.SupportModule; }); } }
 
 

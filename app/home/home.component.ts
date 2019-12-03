@@ -26,6 +26,8 @@ import { Page } from "tns-core-modules/ui/page";
 import { getText, setText, getTextSync, setTextSync } from "nativescript-clipboard";
 import * as timer from "timer";
 import { ItemEventData, ListView } from "tns-core-modules/ui/list-view";
+import * as SocialShare from "nativescript-social-share";
+import { ImageSource } from "image-source";
 
 @Component({
   selector: "Home",
@@ -141,6 +143,7 @@ export class HomeComponent implements AfterViewInit {
     this.showBuyTools = false
     this.showCreate = false
     this.liveGame = 0
+    this.LOCALGAMES = []
 
   }
 
@@ -165,12 +168,11 @@ export class HomeComponent implements AfterViewInit {
           console.log("Error: " + (e.message || e));
         }).catch(ex => {
 
-          console.log("Unable to Enable Location", ex);
+          console.log("Unable to Enable Your Device Location", ex);
         });
       }
     }, (e) => {
-      this.pop(e.message, 'error')
-      console.log("Error: " + (e.message || e));
+
     });
   }
 
@@ -189,20 +191,19 @@ export class HomeComponent implements AfterViewInit {
         this.lng = loc.longitude
         localStorage.setString('lat', JSON.stringify(this.lat))
         localStorage.setString('lng', JSON.stringify(this.lng))
-
-        this.gStorage()
+        this.bLOCALGAMES()
         // console.log(loc)
       } else {
 
-        this.bGAMES()
-        console.log('no loc')
+        this.pop('unable to get your location, local games won\'t be available', 'errors')
+
+        // this.bGAMES()
 
       }
     }, (e) => {
 
-      this.pop(e.message, 'error')
+      this.pop('unable to get your location, local games won\'t be available', 'errors')
 
-      console.log("Error: " + (e.message || e));
     });
   }
 
@@ -229,13 +230,13 @@ export class HomeComponent implements AfterViewInit {
     if (this.user) {
       console.log("got user id stored")
       this.gUSER()
-      this.bGAMES()
+      // this.bGAMES()
 
     } else {
 
       console.log("no users")
 
-      this.bGAMES()
+      // this.bGAMES()
 
     }
 
@@ -462,9 +463,21 @@ export class HomeComponent implements AfterViewInit {
       } else if (result == 'about us') {
 
         setTimeout(() => {
-          console.log("about clicked")
 
           this.router.navigate(['/about'], {
+            animated: true,
+            clearHistory: false
+          })
+        }, 300);
+      } else if (result == 'chat') {
+
+        this.pop("chat  is coming soon", 'error')
+
+      } else if (result == 'support') {
+
+        setTimeout(() => {
+
+          this.router.navigate(['/support'], {
             animated: true,
             clearHistory: false
           })
@@ -499,49 +512,60 @@ export class HomeComponent implements AfterViewInit {
 
   // --------------------------------------------------------------------
   // bring global game
-  bGAMES() {
+  bGLOBALGAMES() {
 
-    this.$game.bGAMES(this.lat, this.lng)
+    this.$game.bGLOBALGAMES()
       .subscribe(
         (jordi: any) => {
           if (jordi.success) {
+            console.log(jordi.payload)
             this.zone.run(() => {
 
               this.DGAMES = jordi.payload[0]
-              // console.log(this.DGAMES.length)
-              // if (!this.DGAMES) {
-              //   this.bGAMES()
-              // }
-
               this.GLOBALGAMES = this.DGAMES
-              console.log(this.GLOBALGAMES.length)
-              // console.log(jordi.payload[1])
-              this.LOCALGAMES = jordi.payload[0] || '[]'
               this.Dgame = this.DGAMES[Math.floor(Math.random() * this.DGAMES.length)];
-              // console.log(this.Dgame)
-
               this.$gID = this.Dgame.game
               this.title = this.Dgame.details.title
               this.image = this.Dgame.details.images[0].url
               this.playersMax = this.Dgame.details.playersMax
               this.playersMin = this.Dgame.details.playersMin
               this.playersReady = this.Dgame.details.playersReady
-              // console.log(this.$gID)
+
               this.runTimer = true
               this.onTimer()
               this.cd.detectChanges();
 
             })
 
-
           } else {
-
-            console.log('no games available yets')
+            //no  success here check local
           }
-
         })
+
   }
 
+  // --------------------------------------------------------------------
+  // bring local games
+  bLOCALGAMES() {
+
+    this.$game.bLOCALGAMES(this.token, this.user, this.lat, this.lng)
+      .subscribe(
+        (jordi: any) => {
+          if (jordi.success) {
+            // console.log(jordi.payload)
+            this.zone.run(() => {
+
+              this.LOCALGAMES = jordi.payload[0]
+              this.cd.detectChanges();
+
+            })
+
+          } else {
+            //no  success here check local
+          }
+        })
+
+  }
 
   // --------------------------------------------------------------------
   // Game  Action
@@ -853,11 +877,11 @@ export class HomeComponent implements AfterViewInit {
         })
   }
 
-  onCalculate() {
 
-    this.buyTotal = (this.buySlaps + this.buyGrabs)
-    return this.buyTotal
 
+  onShare() {
+
+    SocialShare.shareUrl("https://www.nativescript.org/", "come play grabbit with me, we can win awesome prizes");
   }
 
   // --------------------------------------------------------------------
@@ -909,6 +933,8 @@ export class HomeComponent implements AfterViewInit {
         timer.clearTimeout(this.OTIMER);
 
       } else {
+
+        this.bGLOBALGAMES()
         this.onTimer()
 
       }
@@ -974,8 +1000,15 @@ export class HomeComponent implements AfterViewInit {
     tabContentsArr[this.defaultSelected].nativeElement.translateY = - 15;
     this.currentTabIndex = this.defaultSelected;
 
+    //get user
+    this.gStorage()
+
+    ///get user location
     this.geo()
     this.bGeo()
+
+    //get  global game
+    this.bGLOBALGAMES()
   }
 
   getSlideAnimation(index: number, duration: number) {
@@ -1015,7 +1048,7 @@ export class HomeComponent implements AfterViewInit {
         this.onBottomNavTap(2)
         this.cd.detectChanges();
 
-      }, 500)
+      }, 1000)
     })
   }
   pop(message: any, type: any) {

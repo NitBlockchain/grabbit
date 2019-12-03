@@ -10,6 +10,7 @@ import { Location } from "@angular/common";
 })
 export class SupportComponent implements AfterViewInit {
 
+  USER: any
   constructor(private zone: NgZone, private cd: ChangeDetectorRef, private location: Location) {
 
 

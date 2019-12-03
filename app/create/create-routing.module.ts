@@ -5,7 +5,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { CreateComponent } from "./create.component";
 
 const routes: Routes = [
-  { path: "about", component: CreateComponent }
+  { path: "create", component: CreateComponent }
 ];
 
 @NgModule({

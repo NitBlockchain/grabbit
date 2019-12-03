@@ -46,6 +46,7 @@
         "nativescript-ios-uuid": "^1.0.0",
         "nativescript-iqkeyboardmanager": "1.5.1",
         "nativescript-local-notifications": "^4.1.2",
+        "nativescript-messenger": "^1.2.0",
         "nativescript-phone": "^1.4.1",
         "nativescript-sms-receiver": "^1.0.0",
         "nativescript-social-share": "1.5.2",

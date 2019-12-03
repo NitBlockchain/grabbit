@@ -5,11 +5,12 @@
   </ActionItem>
 
   <ActionItem (tap)="onPlay()" ios.position="right" text="Play" *ngIf="currentTabIndex==2  && !USERINGAME"></ActionItem>
-  <ActionItem (tap)="onPlay()" ios.position="right" text="block player" *ngIf="currentTabIndex==2  && USERINGAME"></ActionItem>
+  <ActionItem (tap)="onShare()" ios.position="right" text="Grab Friends" *ngIf="currentTabIndex==2  && USERINGAME"></ActionItem>
   <ActionItem (tap)="onEdit()" ios.position="right" text="Edit" *ngIf="currentTabIndex==3  && user"></ActionItem>
   <ActionItem (tap)="onType('local')" ios.position="right" text="Local Games" *ngIf="currentTabIndex==1 && $gType=='global'"></ActionItem>
   <ActionItem (tap)="onType('global')" ios.position="right" text="Global Games" *ngIf="currentTabIndex==1 && $gType=='local'"></ActionItem>
 </ActionBar>
+
 <GridLayout>
   <GridLayout>
     <Tabs #tabs [selectedIndex]="defaultSelected" (selectedIndexChanged)="onSelectedIndexChanged($event)">
@@ -184,7 +185,7 @@
 
             </StackLayout>
 
-            <StackLayout row="1" *ngIf="$gType=='local' && (LOCALGAMES && LOCALGAMES.length<1) || !LOCALGAMES">
+            <StackLayout row="1" *ngIf="$gType=='local' && (LOCALGAMES && LOCALGAMES.length<1)">
               <Label text="no local games available, you are free  to create one" class="h3 text-center p-t-20 p-b-20" horizontalAlignment="stretch"></Label>
 
             </StackLayout>
@@ -431,17 +432,37 @@
       </TabContentItem>
 
       <TabContentItem [backgroundColor]="tabList[4].backgroundColor">
-        <GridLayout rows="*,*,*">
-          <StackLayout orientation="vertical" row="4" backgroundColor="#F1F1F1">
+        <ScrollView>
 
-            <Label text="total USD: ${{maxPlayers*playerFee || 0 | number : '1.2-2'}}" class="h2 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
-            <Label text="1 btc = ${{btc_value}}" class="h4 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
+          <GridLayout rows="*,*,*" columns="*">
+            <StackLayout row="0" backgroundColor="#F1F1F1">
 
-            <Label text="Winner(s) must redeem coupon within 72  hours" class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
-            <Label text="If less than the max number of players play your game, the difference will be returned to your wallet" class="h3 text-center p-t-10" horizontalAlignment="stretch" textWrap="true" lineHeight="21"></Label>
+              <Label text="Your Wins" class="h2 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
+              <Label text="redeem your wins within 72 hours to get perks" class="h4 text-center p-t-20 p-b-20" horizontalAlignment="stretch"></Label>
 
-          </StackLayout>
-        </GridLayout>
+            </StackLayout>
+            <StackLayout orientation="vertical" row="1" *ngIf="WINS &&  WINS.length>0">
+
+              <CardView *ngFor="let data of WINS" (tap)="setGameId(data.game)">
+                <StackLayout orientation="horizontal" margin="12" class="text-center">
+                  <GridLayout rows="*,*" columns="*">
+                    <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
+                    <Label row="1" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
+
+                  </GridLayout>
+                </StackLayout>
+
+              </CardView>
+
+            </StackLayout>
+            <StackLayout orientation="vertical" row="1" *ngIf="WINS &&  WINS.length<1">
+              <Label text="No Wins Yet" class="h2 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
+
+
+            </StackLayout>
+          </GridLayout>
+        </ScrollView>
+
       </TabContentItem>
     </Tabs>
   </GridLayout>
