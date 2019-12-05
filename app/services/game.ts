@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/Rx';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+import axios from "axios";
+// const poster = axios.create();
+// poster.defaults.headers.post['Content-Type'] = 'application/json';
 
 /*
   Generated class for the SessionProvider provider.
@@ -16,6 +19,8 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
   providedIn: 'root',
 })
 export class GameProvider {
+
+  private serverUrl = "https://app.grabbit.cheap";
 
   constructor(public http: HttpClient) {
     //console.log('Hello SessionProvider Provider');
@@ -414,6 +419,14 @@ export class GameProvider {
       .catch(this.handleError);
   }
 
+  private createRequestHeader() {
+    // set headers here e.g.
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+    return headers;
+  }
+
   private extractData(res: Response) {
     let body = res;
     return body || {};
@@ -427,7 +440,7 @@ export class GameProvider {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
+    console.error('error  is ' + JSON.stringify(errMsg));
     return observableThrowError(errMsg);
   }
 

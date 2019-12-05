@@ -1,5 +1,6 @@
 import { NgModule, NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
+import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from "./app.component";
 import * as geolocation from "nativescript-geolocation";
@@ -12,6 +13,7 @@ import { CreateComponent } from "./create/create.component"
 import { CreateBusinessComponent } from "./create-business/create-business.component"
 import { SupportComponent } from "./support/support.component"
 import { LegalsComponent } from "./legals/legals.component"
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 @NgModule({
 
@@ -20,7 +22,9 @@ import { LegalsComponent } from "./legals/legals.component"
   ],
   imports: [
     NativeScriptModule,
+    HttpModule,
     HttpClientModule,
+    NativeScriptHttpClientModule,
     NativeScriptFormsModule,
     ReactiveFormsModule,
     AppRoutingModule

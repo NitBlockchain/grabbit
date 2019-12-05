@@ -28,7 +28,10 @@ import * as timer from "timer";
 import { ItemEventData, ListView } from "tns-core-modules/ui/list-view";
 import * as SocialShare from "nativescript-social-share";
 import { ImageSource } from "image-source";
-
+import * as http from "http";
+import { getFile, getImage, getJSON, getString, request, HttpResponse } from "tns-core-modules/http";
+import { HttpClient, HttpHeaders, } from "@angular/common/http";
+const httpModule = require("http");
 @Component({
   selector: "Home",
   moduleId: module.id,
@@ -140,7 +143,7 @@ export class HomeComponent implements AfterViewInit {
   math = Math
   countryCode: any
 
-  constructor(public _game: GameProvider, private zone: NgZone, private cd: ChangeDetectorRef, private router: RouterExtensions, private page: Page) {
+  constructor(private http: HttpClient, public _game: GameProvider, private zone: NgZone, private cd: ChangeDetectorRef, private router: RouterExtensions, private page: Page) {
 
     this.$game = _game
     this.$gType = 'global'
@@ -549,33 +552,54 @@ export class HomeComponent implements AfterViewInit {
   // bring global game
   bGLOBALGAMES() {
 
-    this.$game.bGLOBALGAMES()
-      .subscribe(
-        (jordi: any) => {
-          if (jordi.success) {
-            console.log(jordi.payload)
-            this.zone.run(() => {
+    console.log("getting global games this time")
+    request({
+      url: "https://app.grabbit.cheap/bGLOBALGAMES",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      content: JSON.stringify({
 
-              this.DGAMES = jordi.payload[0]
-              this.GLOBALGAMES = this.DGAMES
-              this.Dgame = this.DGAMES[Math.floor(Math.random() * this.DGAMES.length)];
-              this.$gID = this.Dgame.game
-              this.title = this.Dgame.details.title
-              this.image = this.Dgame.details.images[0].url
-              this.playersMax = this.Dgame.details.playersMax
-              this.playersMin = this.Dgame.details.playersMin
-              this.playersReady = this.Dgame.details.playersReady
+      })
+    }).then((response) => {
+      const result = response.content.toJSON();
+      console.log(result)
+    }, (e) => {
 
-              this.runTimer = true
-              this.onTimer()
-              this.cd.detectChanges();
+      console.log(e)
 
-            })
-
-          } else {
-            //no  success here check local
-          }
-        })
+    });
+    // this.$game.bGLOBALGAMES()
+    //   .subscribe(
+    //     (jordi: any) => {
+    //       if (jordi.success) {
+    //         // console.log(jordi.payload)
+    //         this.zone.run(() => {
+    //
+    //           this.DGAMES = jordi.payload[0]
+    //           this.GLOBALGAMES = this.DGAMES
+    //           this.Dgame = this.DGAMES[Math.floor(Math.random() * this.DGAMES.length)];
+    //           this.$gID = this.Dgame.game
+    //           this.title = this.Dgame.details.title
+    //           this.image = this.Dgame.details.images[0].url
+    //           this.playersMax = this.Dgame.details.playersMax
+    //           this.playersMin = this.Dgame.details.playersMin
+    //           this.playersReady = this.Dgame.details.playersReady
+    //
+    //           this.runTimer = true
+    //           this.onTimer()
+    //           this.cd.detectChanges();
+    //
+    //         })
+    //
+    //       } else {
+    //
+    //         console.log("no global games here")
+    //
+    //         //no  success here check local
+    //       }
+    //     }, (error) => {
+    //       console.error('error getting global games' + JSON.stringify(error))
+    //     })
 
   }
 
@@ -635,7 +659,7 @@ export class HomeComponent implements AfterViewInit {
                   this.USERINGAME = this.PLAYERS.find((x: any) => x.user == this.user)
 
                   this.gameTime = jordi.timer
-                  console.log(this.$gID)
+                  // console.log(this.$gID)
 
                 } else {
 
@@ -997,7 +1021,7 @@ export class HomeComponent implements AfterViewInit {
 
       // set current index to new index
       this.currentTabIndex = index;
-      console.log(index)
+      // console.log(index)
 
       if (index != 2) {
 
