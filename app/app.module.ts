@@ -1,7 +1,7 @@
 import { NgModule, NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { HttpModule } from '@angular/http';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AppComponent } from "./app.component";
 import * as geolocation from "nativescript-geolocation";
 import { Accuracy } from "tns-core-modules/ui/enums"; // used to describe at what accuracy the location should be get
@@ -22,8 +22,6 @@ import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
   ],
   imports: [
     NativeScriptModule,
-    HttpModule,
-    HttpClientModule,
     NativeScriptHttpClientModule,
     NativeScriptFormsModule,
     ReactiveFormsModule,

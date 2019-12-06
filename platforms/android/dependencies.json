@@ -36,10 +36,6 @@
         "directory": "../../node_modules/nativescript-angular"
     },
     {
-        "name": "nativescript-background-http",
-        "directory": "../../node_modules/nativescript-background-http"
-    },
-    {
         "name": "nativescript-camera",
         "directory": "../../node_modules/nativescript-camera"
     },
@@ -142,6 +138,10 @@
     {
         "name": "tns-core-modules-widgets",
         "directory": "../../node_modules/tns-core-modules-widgets"
+    },
+    {
+        "name": "nativescript-background-http",
+        "directory": "../../node_modules/kinvey-nativescript-sdk/node_modules/nativescript-background-http"
     },
     {
         "name": "nativescript-secure-storage",

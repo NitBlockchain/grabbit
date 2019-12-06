@@ -14,10 +14,9 @@ import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
 import { ImageFormat } from "ui/enums";
 import * as Camera from "nativescript-camera";
 import * as Toast from "nativescript-toast";
-var FileSystem = require("file-system");
-var BackgroundHttp = require("nativescript-background-http");
-var MD5 = require("blueimp-md5");
-import { Observable } from "rxjs/Observable";
+// var FileSystem = require("file-system");
+// var BackgroundHttp = require("nativescript-background-http");
+// var MD5 = require("blueimp-md5");
 import * as dialogs from "tns-core-modules/ui/dialogs";
 
 @Component({

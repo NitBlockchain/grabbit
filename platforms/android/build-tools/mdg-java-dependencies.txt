@@ -18,8 +18,7 @@
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/2b699c44df350bb210fd35131e237010/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/28244e9968a44c1c5d72b9add2d1dcf1/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/efaad76038a72be18d5891dddfe2e3d2/classes.jar
-/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/0cea3895e6ef649936c2414160d492d7/classes.jar
-/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/c889b7798eb77f3dc50cc395b7e43c92/classes.jar
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/967e419d36f80f4a04aed5a993d0bc0f/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/9341f199ec22f16f15b257a4d8c81450/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/6e42ebc7b009949be36d7fc5d00c09aa/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/1cb101822b6fcfccad2ac6b8c8f61853/classes.jar
@@ -67,6 +66,7 @@
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/befd70f64e49f77e86dca1c14c995961/okio-2.2.2.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/b0bb3cc14938dd917d1ad6fd27e7cb4f/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/18e59551e9a6e1599116f96a8c647ef3/classes.jar
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/f87bab2d42edde542b0c6501681404ae/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/70637d33217ba97bc68ebf6c0aef671a/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/09181ca3b94b471b3e98b9154c6199e8/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/24d2eda578268d394ee69a8257507de8/classes.jar
@@ -76,10 +76,11 @@
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/4a056615497679e7c8bf54a279635f7b/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/a5dcf77fa8942f8c870298c8a2311b56/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/d9141e92a22e3f178ac65fdfa81845d6/classes.jar
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/6200c42ce886d33de449bb1ce0a2399d/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/0ec6f90c056d7a5525a1190e6421854f/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/8a9f2372c1a6b5e1ff278b6a61f36343/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/72ea88a84f4222ed472d086a1419d608/annotation-1.0.0.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/8b03b7c2e575dd289c9102d4fca0dc4a/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/2ece297e99828f25656afd86fa341f93/classes.jar
 /Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/exploded-dependencies/ab125f2691e49d096948b35a5c90924d/classes.jar
-/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/intermediates/javac/debug
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/build/intermediates/javac/release

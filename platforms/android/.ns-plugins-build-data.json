@@ -53,8 +53,8 @@
 		"/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/node_modules/nativescript-social-share/platforms/android/nativescript_social_share.aar": "cf8a832dbf68b3c28c104617db0285c4105961c8"
 	},
 	"nativescript-telephony": {
-		"/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/node_modules/nativescript-telephony/platforms/android/AndroidManifest.xml": "19bc7f757ef5ea28b0f7503973cd61b1a16cfbb5",
-		"/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/node_modules/nativescript-telephony/platforms/android/nativescript_telephony.aar": "57953fff35957bbf33b1af065c8edf1796526a1e"
+		"/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/node_modules/nativescript-telephony/platforms/android/nativescript_telephony.aar": "57953fff35957bbf33b1af065c8edf1796526a1e",
+		"/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/node_modules/nativescript-telephony/platforms/android/AndroidManifest.xml": "19bc7f757ef5ea28b0f7503973cd61b1a16cfbb5"
 	},
 	"nativescript-ui-autocomplete": {
 		"/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/node_modules/nativescript-ui-autocomplete/platforms/android/include.gradle": "f3cee71f7a1cfc3f567bb82cf49fe10a8cccd33a",

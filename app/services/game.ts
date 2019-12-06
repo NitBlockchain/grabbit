@@ -3,9 +3,8 @@ import { throwError as observableThrowError, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import 'rxjs/Rx';
+// import 'rxjs/Rx';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-import axios from "axios";
 // const poster = axios.create();
 // poster.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -23,7 +22,7 @@ export class GameProvider {
   private serverUrl = "https://app.grabbit.cheap";
 
   constructor(public http: HttpClient) {
-    //console.log('Hello SessionProvider Provider');
+
   }
 
   ////guser
@@ -42,8 +41,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/gUSER', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   reload(token: any, user: any, gID: any, type: any) {
@@ -61,8 +60,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/reload', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   bGLOBALGAMES() {
@@ -78,8 +77,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/bGLOBALGAMES', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   bLOCALGAMES(token, user, lat, lng) {
@@ -97,8 +96,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/bLOCALGAMES', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   ////business
@@ -122,8 +121,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/bSAVE', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   ////game
@@ -144,8 +143,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/bGAMES', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   onGrab(token: any, user: any, game: any) {
@@ -162,8 +161,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/grab', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   onSlap(token: any, user: any, game: any) {
@@ -180,8 +179,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/slap', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   onSneak(token: any, user: any, game: any) {
@@ -198,8 +197,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/sneak', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   onAvatar(token: any, user: any, avatar: any) {
@@ -216,8 +215,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/avatar', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   onEdit(token: any, user: any, text: any, type: any) {
@@ -235,8 +234,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/profile/edit', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   onTimer(token: any, user: any, gID: any) {
@@ -253,8 +252,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/timer', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   play(token: any, user: any, gID: any) {
@@ -271,8 +270,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/play', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   login(number: string, device: string, lat: string, lng: string, countryCode) {
@@ -291,8 +290,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/login', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   loginComplete(code: string, device: string) {
@@ -308,8 +307,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/loginComplete', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   bYELP(token: string, user: string, lat: string, lng: string, yelp: string) {
@@ -328,8 +327,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/bYelp', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   vYELP(token: string, user: string, code: string) {
@@ -346,8 +345,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/vYelp', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   gCREATECOUPON(token: string, user: string, prizeType: string, gameTitle: string, maxPlayers: any, prize: string, prize2: string, price: any, total: any) {
@@ -370,8 +369,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/gCreate', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
 
@@ -393,8 +392,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/gCreateBTC', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
 
@@ -415,8 +414,8 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/onPay', DATA, httpOptions)
-      .map(this.extractData)
-      .catch(this.handleError);
+    // .map(this.extractData)
+    // .catch(this.handleError);
   }
 
   private createRequestHeader() {

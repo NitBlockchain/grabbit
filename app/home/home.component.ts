@@ -28,10 +28,8 @@ import * as timer from "timer";
 import { ItemEventData, ListView } from "tns-core-modules/ui/list-view";
 import * as SocialShare from "nativescript-social-share";
 import { ImageSource } from "image-source";
-import * as http from "http";
-import { getFile, getImage, getJSON, getString, request, HttpResponse } from "tns-core-modules/http";
 import { HttpClient, HttpHeaders, } from "@angular/common/http";
-const httpModule = require("http");
+
 @Component({
   selector: "Home",
   moduleId: module.id,
@@ -226,7 +224,7 @@ export class HomeComponent implements AfterViewInit {
     Telephony().then((resolved: any) => {
 
       this.countryCode = resolved.countryCode
-      this.pop(this.countryCode, 'success')
+      // this.pop(this.countryCode, 'success')
     }).catch((error) => {
 
     })
@@ -243,7 +241,7 @@ export class HomeComponent implements AfterViewInit {
 
 
     if (this.user) {
-      console.log("got user id stored")
+      // console.log("got user id stored")
       this.gUSER()
       // this.bGAMES()
 
@@ -552,54 +550,40 @@ export class HomeComponent implements AfterViewInit {
   // bring global game
   bGLOBALGAMES() {
 
-    console.log("getting global games this time")
-    request({
-      url: "https://app.grabbit.cheap/bGLOBALGAMES",
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      content: JSON.stringify({
+    console.log('getting  global games again')
 
-      })
-    }).then((response) => {
-      const result = response.content.toJSON();
-      console.log(result)
-    }, (e) => {
+    this.$game.bGLOBALGAMES()
+      .subscribe(
+        (jordi: any) => {
+          if (jordi.success) {
+            // console.log(jordi.payload)
+            this.zone.run(() => {
 
-      console.log(e)
+              this.DGAMES = jordi.payload[0]
+              this.GLOBALGAMES = this.DGAMES
+              this.Dgame = this.DGAMES[Math.floor(Math.random() * this.DGAMES.length)];
+              this.$gID = this.Dgame.game
+              this.title = this.Dgame.details.title
+              this.image = this.Dgame.details.images[0].url
+              this.playersMax = this.Dgame.details.playersMax
+              this.playersMin = this.Dgame.details.playersMin
+              this.playersReady = this.Dgame.details.playersReady
 
-    });
-    // this.$game.bGLOBALGAMES()
-    //   .subscribe(
-    //     (jordi: any) => {
-    //       if (jordi.success) {
-    //         // console.log(jordi.payload)
-    //         this.zone.run(() => {
-    //
-    //           this.DGAMES = jordi.payload[0]
-    //           this.GLOBALGAMES = this.DGAMES
-    //           this.Dgame = this.DGAMES[Math.floor(Math.random() * this.DGAMES.length)];
-    //           this.$gID = this.Dgame.game
-    //           this.title = this.Dgame.details.title
-    //           this.image = this.Dgame.details.images[0].url
-    //           this.playersMax = this.Dgame.details.playersMax
-    //           this.playersMin = this.Dgame.details.playersMin
-    //           this.playersReady = this.Dgame.details.playersReady
-    //
-    //           this.runTimer = true
-    //           this.onTimer()
-    //           this.cd.detectChanges();
-    //
-    //         })
-    //
-    //       } else {
-    //
-    //         console.log("no global games here")
-    //
-    //         //no  success here check local
-    //       }
-    //     }, (error) => {
-    //       console.error('error getting global games' + JSON.stringify(error))
-    //     })
+              this.runTimer = true
+              this.onTimer()
+              this.cd.detectChanges();
+
+            })
+
+          } else {
+
+            console.log("no global games here")
+
+            //no  success here check local
+          }
+        }, (error) => {
+          console.error('error getting global games' + JSON.stringify(error))
+        })
 
   }
 
@@ -1037,6 +1021,7 @@ export class HomeComponent implements AfterViewInit {
       this.cd.detectChanges();
 
     })
+
 
   }
 

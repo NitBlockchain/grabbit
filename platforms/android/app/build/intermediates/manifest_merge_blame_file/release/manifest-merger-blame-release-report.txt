@@ -1,0 +1,206 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="grabbit.cheap"
+4    android:versionCode="7"
+5    android:versionName="1.6" >
+6
+7    <uses-sdk
+7-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:12:2-14:44
+8        android:minSdkVersion="18"
+8-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:13:3-29
+9        android:targetSdkVersion="28" />
+9-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:14:3-42
+10
+11    <supports-screens
+11-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:7:2-11:33
+12        android:largeScreens="true"
+12-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:10:3-30
+13        android:normalScreens="true"
+13-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:9:3-31
+14        android:smallScreens="true"
+14-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:8:3-30
+15        android:xlargeScreens="true" />
+15-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:11:3-31
+16
+17    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+17-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:16:2-76
+17-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:16:19-74
+18    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+18-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:17:2-77
+18-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:17:19-75
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:18:2-63
+19-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:18:19-61
+20    <uses-permission android:name="android.permission.CALL_PHONE" />
+20-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:19:2-66
+20-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:19:19-63
+21    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+21-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:20:1-75
+21-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:20:18-72
+22    <uses-permission android:name="android.permission.WAKE_LOCK" />
+22-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:14:5-68
+22-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:14:22-65
+23    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+23-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:15:5-77
+23-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:15:22-74
+24    <uses-permission android:name="android.permission.CAMERA" />
+24-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:10:5-65
+24-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:10:22-62
+25    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+25-->[:nativescript_geolocation:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5fe4cd9174197e1aab5cb9e6d11eba8b/nativescript_geolocation/AndroidManifest.xml:9:5-79
+25-->[:nativescript_geolocation:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5fe4cd9174197e1aab5cb9e6d11eba8b/nativescript_geolocation/AndroidManifest.xml:9:22-76
+26    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+26-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:11:5-81
+26-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:11:22-78
+27    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+27-->[:nativescript_telephony:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/c30b4ef40f866a758b0dbdeda04b8eb7/nativescript_telephony/AndroidManifest.xml:9:5-75
+27-->[:nativescript_telephony:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/c30b4ef40f866a758b0dbdeda04b8eb7/nativescript_telephony/AndroidManifest.xml:9:22-72
+28
+29    <application
+29-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:21:2-43:16
+30        android:name="com.tns.NativeScriptApplication"
+30-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:22:3-49
+31        android:allowBackup="true"
+31-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:23:3-29
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.0.1] /Users/owoman/.gradle/caches/transforms-2/files-2.1/3d3d0b77ddd3e70ec0512eb77638feaf/core-1.0.1/AndroidManifest.xml:22:18-86
+33        android:icon="@drawable/icon"
+33-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:24:3-32
+34        android:label="@string/app_name"
+34-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:25:3-35
+35        android:theme="@style/AppTheme"
+35-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:26:3-34
+36        android:usesCleartextTraffic="true" >
+36-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:27:1-36
+37        <activity
+37-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:29:3-41:14
+38            android:name="com.tns.NativeScriptActivity"
+38-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:30:4-47
+39            android:configChanges="keyboardHidden|orientation|screenSize"
+39-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:32:4-65
+40            android:label="@string/title_activity_kimera"
+40-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:31:4-49
+41            android:theme="@style/LaunchScreenTheme" >
+41-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:33:4-44
+42            <meta-data
+42-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:35:4-87
+43                android:name="SET_THEME_ON_LAUNCH"
+43-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:35:15-49
+44                android:resource="@style/AppTheme" />
+44-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:35:50-84
+45
+46            <intent-filter>
+46-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:37:4-40:20
+47                <action android:name="android.intent.action.MAIN" />
+47-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:38:5-57
+47-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:38:13-54
+48
+49                <category android:name="android.intent.category.LAUNCHER" />
+49-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:39:5-65
+49-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:39:15-62
+50            </intent-filter>
+51        </activity>
+52        <activity android:name="com.tns.ErrorReportActivity" />
+52-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:42:3-57
+52-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/AndroidManifest.xml:42:13-55
+53
+54        <service
+54-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:18:9-22:19
+55            android:name="net.gotev.uploadservice.UploadService"
+55-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:19:13-65
+56            android:enabled="true"
+56-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:20:13-35
+57            android:exported="false" >
+57-->[net.gotev:uploadservice:3.5.2] /Users/owoman/.gradle/caches/transforms-2/files-2.1/5cbb839fa659b08485d9dcf97d70ced6/uploadservice-3.5.2/AndroidManifest.xml:21:13-37
+58        </service>
+59
+60        <activity
+60-->[com.google.android.gms:play-services-base:11.4.0] /Users/owoman/.gradle/caches/transforms-2/files-2.1/aff4d59b9f0579c44a1febd805a53c18/jetified-play-services-base-11.4.0/AndroidManifest.xml:19:9-172
+61            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+61-->[com.google.android.gms:play-services-base:11.4.0] /Users/owoman/.gradle/caches/transforms-2/files-2.1/aff4d59b9f0579c44a1febd805a53c18/jetified-play-services-base-11.4.0/AndroidManifest.xml:19:19-85
+62            android:exported="false"
+62-->[com.google.android.gms:play-services-base:11.4.0] /Users/owoman/.gradle/caches/transforms-2/files-2.1/aff4d59b9f0579c44a1febd805a53c18/jetified-play-services-base-11.4.0/AndroidManifest.xml:19:146-170
+63            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+63-->[com.google.android.gms:play-services-base:11.4.0] /Users/owoman/.gradle/caches/transforms-2/files-2.1/aff4d59b9f0579c44a1febd805a53c18/jetified-play-services-base-11.4.0/AndroidManifest.xml:19:86-145
+64
+65        <meta-data
+65-->[com.google.android.gms:play-services-basement:11.4.0] /Users/owoman/.gradle/caches/transforms-2/files-2.1/db97787e28cdeedd23aed438c6fb87e8/jetified-play-services-basement-11.4.0/AndroidManifest.xml:20:9-121
+66            android:name="com.google.android.gms.version"
+66-->[com.google.android.gms:play-services-basement:11.4.0] /Users/owoman/.gradle/caches/transforms-2/files-2.1/db97787e28cdeedd23aed438c6fb87e8/jetified-play-services-basement-11.4.0/AndroidManifest.xml:20:20-65
+67            android:value="@integer/google_play_services_version" />
+67-->[com.google.android.gms:play-services-basement:11.4.0] /Users/owoman/.gradle/caches/transforms-2/files-2.1/db97787e28cdeedd23aed438c6fb87e8/jetified-play-services-basement-11.4.0/AndroidManifest.xml:20:66-119
+68
+69        <provider
+69-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:13:9-22:20
+70            android:name="androidx.core.content.FileProvider"
+70-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:14:13-62
+71            android:authorities="grabbit.cheap.provider"
+71-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:15:13-60
+72            android:exported="false"
+72-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:16:13-37
+73            android:grantUriPermissions="true" >
+73-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:17:13-47
+74            <meta-data
+74-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:18:13-21:52
+75                android:name="android.support.FILE_PROVIDER_PATHS"
+75-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:19:17-67
+76                android:resource="@xml/provider_paths" />
+76-->[:nativescript_camera:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/49927b70320274d6e2b8f91466628c1b/jetified-nativescript_camera/AndroidManifest.xml:20:17-55
+77        </provider>
+78
+79        <service
+79-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:15:9-17:40
+80            android:name="com.telerik.localnotifications.NotificationActionReceiver"
+80-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:16:13-85
+81            android:exported="false" />
+81-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:17:13-37
+82
+83        <receiver
+83-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:19:9-21:40
+84            android:name="com.telerik.localnotifications.NotificationClearedReceiver"
+84-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:20:13-86
+85            android:exported="false" />
+85-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:21:13-37
+86        <receiver
+86-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:22:9-24:40
+87            android:name="com.telerik.localnotifications.NotificationAlarmReceiver"
+87-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:23:13-84
+88            android:exported="false" />
+88-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:24:13-37
+89        <receiver
+89-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:25:9-33:20
+90            android:name="com.telerik.localnotifications.NotificationRestoreReceiver"
+90-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:26:13-86
+91            android:directBootAware="true"
+91-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:27:13-43
+92            android:exported="false" >
+92-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:28:13-37
+93            <intent-filter>
+93-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:29:13-32:29
+94                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+94-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:30:17-86
+94-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:30:25-83
+95                <action android:name="android.intent.action.BOOT_COMPLETED" />
+95-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:31:17-79
+95-->[:app-release:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/0ad76d140d99f608a2cce3bb88fb8c59/app-release/AndroidManifest.xml:31:25-76
+96            </intent-filter>
+97        </receiver>
+98
+99        <service
+99-->[:nativescript_background_http:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/9ed9ed748573e524cdc06d1d078cda3b/nativescript_background_http/AndroidManifest.xml:15:9-22:19
+100            android:name="com.alexbbb.uploadservice.UploadService"
+100-->[:nativescript_background_http:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/9ed9ed748573e524cdc06d1d078cda3b/nativescript_background_http/AndroidManifest.xml:16:13-67
+101            android:enabled="true"
+101-->[:nativescript_background_http:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/9ed9ed748573e524cdc06d1d078cda3b/nativescript_background_http/AndroidManifest.xml:17:13-35
+102            android:exported="false" >
+102-->[:nativescript_background_http:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/9ed9ed748573e524cdc06d1d078cda3b/nativescript_background_http/AndroidManifest.xml:18:13-37
+103            <intent-filter>
+103-->[:nativescript_background_http:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/9ed9ed748573e524cdc06d1d078cda3b/nativescript_background_http/AndroidManifest.xml:19:13-21:29
+104                <action android:name="org.nativescript.imagepicker.uploadservice.action.upload" />
+104-->[:nativescript_background_http:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/9ed9ed748573e524cdc06d1d078cda3b/nativescript_background_http/AndroidManifest.xml:20:17-99
+104-->[:nativescript_background_http:] /Users/owoman/.gradle/caches/transforms-2/files-2.1/9ed9ed748573e524cdc06d1d078cda3b/nativescript_background_http/AndroidManifest.xml:20:25-96
+105            </intent-filter>
+106        </service>
+107    </application>
+108
+109</manifest>

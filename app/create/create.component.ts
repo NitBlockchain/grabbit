@@ -14,10 +14,6 @@ import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
 import { ImageFormat } from "ui/enums";
 import * as Camera from "nativescript-camera";
 import * as Toast from "nativescript-toast";
-var FileSystem = require("file-system");
-var BackgroundHttp = require("nativescript-background-http");
-var MD5 = require("blueimp-md5");
-import { Observable } from "rxjs/Observable";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import { getUUID } from 'nativescript-uuid';
 
@@ -336,44 +332,44 @@ export class CreateComponent implements AfterViewInit {
 
   public takePicture() {
 
-    Camera.takePicture({ saveToGallery: false, width: 320, height: 240 }).then((picture: any) => {
-      let folder = FileSystem.knownFolders.documents();
-      let path = FileSystem.path.join(folder.path, MD5(new Date()) + ".png");
-      picture.saveToFile(path, ImageFormat.png, 60);
-      this.upload("https://app.grabbit.cheap/upload", "upload", path)
-        .subscribe(result => {
-          this.zone.run(() => {
-            this.images.push(path.replace(/^.*[\\\/]/, ''));
-          });
-        }, error => {
-          console.log(error);
-        });
-    });
+    // Camera.takePicture({ saveToGallery: false, width: 320, height: 240 }).then((picture: any) => {
+    //   let folder = FileSystem.knownFolders.documents();
+    //   let path = FileSystem.path.join(folder.path, MD5(new Date()) + ".png");
+    //   picture.saveToFile(path, ImageFormat.png, 60);
+    //   this.upload("https://app.grabbit.cheap/upload", "upload", path)
+    //     .subscribe(result => {
+    //       this.zone.run(() => {
+    //         this.images.push(path.replace(/^.*[\\\/]/, ''));
+    //       });
+    //     }, error => {
+    //       console.log(error);
+    //     });
+    // });
   }
 
   public upload(destination: string, filevar: string, filepath: string) {
-    return new Observable((observer: any) => {
-      let session = BackgroundHttp.session("file-upload");
-      let request = {
-        url: destination,
-        method: "POST"
-      };
-      let params = [{ "name": filevar, "filename": filepath, "mimeType": "image/png" }];
-      let task = session.multipartUpload(params, request);
-      task.on("complete", (event) => {
-        let file = FileSystem.File.fromPath(filepath);
-        file.remove().then(result => {
-          observer.next("Uploaded `" + filepath + "`");
-          observer.complete();
-        }, error => {
-          observer.error("Could not delete `" + filepath + "`");
-        });
-      });
-      task.on("error", event => {
-        console.log(event);
-        observer.error("Could not upload `" + filepath + "`. " + event.eventName);
-      });
-    });
+    // return new Observable((observer: any) => {
+    //   let session = BackgroundHttp.session("file-upload");
+    //   let request = {
+    //     url: destination,
+    //     method: "POST"
+    //   };
+    //   let params = [{ "name": filevar, "filename": filepath, "mimeType": "image/png" }];
+    //   let task = session.multipartUpload(params, request);
+    //   task.on("complete", (event) => {
+    //     let file = FileSystem.File.fromPath(filepath);
+    //     file.remove().then(result => {
+    //       observer.next("Uploaded `" + filepath + "`");
+    //       observer.complete();
+    //     }, error => {
+    //       observer.error("Could not delete `" + filepath + "`");
+    //     });
+    //   });
+    //   task.on("error", event => {
+    //     console.log(event);
+    //     observer.error("Could not upload `" + filepath + "`. " + event.eventName);
+    //   });
+    // });
   }
 
   // --------------------------------------------------------------------
