@@ -58,8 +58,9 @@
           <TextField row="3" col="1" [(ngModel)]="prize" hint="winner gets a 25% off coupon" class="input input-border p-t-20" maxLength="45"></TextField>
 
           <TextField row="4" col="1" [(ngModel)]="prize2" hint="none winners get a 10% off coupon" class="input input-border p-t-20" maxLength="45" *ngIf="prizeType=='everyone wins'"></TextField>
-
           <TextField row="4" col="1" [(ngModel)]="price" hint="buy $30 item" class="input input-border p-t-20"  maxLength="24" *ngIf="prizeType=='free item  with  purchase'"></TextField>
+
+          <TextField row="4" col="1" [(ngModel)]="mysteryBoxValue" hint="$25 value" class="input input-border p-t-20"  maxLength="24" *ngIf="prizeType=='mystery box'"></TextField>
           <TextField row="5" col="1" [(ngModel)]="details" hint="prize details" class="input input-border p-t-20"  maxLength="150"></TextField>
 
           <Button row="6" col='1' text="create local game" (tap)="gCreateCoupon()" horizontalAlignment="stretch" class="-primary p-b-20"></Button>
@@ -92,7 +93,7 @@
       </StackLayout>
       <StackLayout orientation="vertical" row="1" *ngIf="type=='coupon'">
 
-        <GridLayout rows="*,*,*,*,*,*,*,*,*,*" columns="*">
+        <GridLayout rows="*,*,*,*,*,*,*,*,*,*,*" columns="*">
 
           <StackLayout class="p-20" row="0">
             <Card:CardView class="cardStyle">
@@ -155,11 +156,23 @@
               </StackLayout>
             </Card:CardView>
           </StackLayout>
-          <StackLayout orientation="vertical" row="6" backgroundColor="#F1F1F1">
+
+          <StackLayout class="p-20" row="6">
+            <Card:CardView class="cardStyle">
+              <StackLayout class="cardContent">
+                <Label text="Mystery Box" class="m-b-10 h3" />
+                <Label text="winner gets a mystery box" class="m-b-10 h3" textWrap="true" />
+                <Label text="$1 per player" class="m-b-10 h3" />
+                <Button text="create" (tap)="onCreate('mystery box')" class="-primary -rounded-lg"></Button>
+
+              </StackLayout>
+            </Card:CardView>
+          </StackLayout>
+          <StackLayout orientation="vertical" row="7" backgroundColor="#F1F1F1">
 
             <Label text="FAQ's" class="h2 text-center p-t-20 p-b-20" horizontalAlignment="stretch"></Label>
           </StackLayout>
-          <StackLayout class="p-20" row="7">
+          <StackLayout class="p-20" row="8">
             <Card:CardView class="cardStyle">
               <StackLayout class="cardContent">
                 <Label text="Explain per player pricing" class="m-b-10 h2" />
@@ -170,7 +183,7 @@
             </Card:CardView>
           </StackLayout>
 
-          <StackLayout class="p-20" row="8">
+          <StackLayout class="p-20" row="9">
             <Card:CardView class="cardStyle">
               <StackLayout class="cardContent">
                 <Label text="Whats the incentive for players to redeem their coupons?" class="m-b-10 h2" textWrap="true" />
@@ -179,7 +192,7 @@
               </StackLayout>
             </Card:CardView>
           </StackLayout>
-          <StackLayout class="p-20" row="9">
+          <StackLayout class="p-20" row="10">
             <Card:CardView class="cardStyle">
               <StackLayout class="cardContent">
                 <Label text="Can I extend the local radius to 20 miles?" class="m-b-10 h2" textWrap="true" />

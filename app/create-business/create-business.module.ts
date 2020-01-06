@@ -26,7 +26,7 @@ import { CreateBusinessComponent } from "./create-business.component";
     NativeScriptFormsModule
   ],
   declarations: [
-    CreateBusinessComponent
+    //CreateBusinessComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

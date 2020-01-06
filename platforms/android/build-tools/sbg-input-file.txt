@@ -1,1 +1,1 @@
-/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/android/app/src/main/assets/app
+/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/Grabbit/platforms/android/app/src/main/assets/app

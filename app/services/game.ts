@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 // import 'rxjs/Rx';
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+// import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 // const poster = axios.create();
 // poster.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -275,6 +275,7 @@ export class GameProvider {
   }
 
   login(number: string, device: string, lat: string, lng: string, countryCode) {
+    console.log(device)
     let DATA = {
       number: number,
       device: device,
@@ -349,7 +350,7 @@ export class GameProvider {
     // .catch(this.handleError);
   }
 
-  gCREATECOUPON(token: string, user: string, prizeType: string, gameTitle: string, maxPlayers: any, prize: string, prize2: string, price: any, total: any) {
+  gCREATECOUPON(token: string, user: string, prizeType: string, gameTitle: string, maxPlayers: any, prize: string, prize2: string, price: any, total: any, mysteryBoxValue: any) {
     let DATA = {
       user: user,
       token: token,
@@ -359,7 +360,8 @@ export class GameProvider {
       prize: prize,
       prize2: prize2,
       price: price,
-      total: total
+      total: total,
+      mysteryBoxValue: mysteryBoxValue
     }
 
     const httpOptions = {
@@ -414,6 +416,24 @@ export class GameProvider {
     };
 
     return this.http.post('https://app.grabbit.cheap/onPay', DATA, httpOptions)
+    // .map(this.extractData)
+    // .catch(this.handleError);
+  }
+
+  gREDEEM(token: any, user: any, code: any) {
+    let DATA = {
+      token: token,
+      user: user,
+      code: code
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('https://app.grabbit.cheap/redeem', DATA, httpOptions)
     // .map(this.extractData)
     // .catch(this.handleError);
   }

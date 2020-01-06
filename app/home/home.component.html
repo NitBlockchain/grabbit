@@ -18,7 +18,7 @@
 <GridLayout>
   <GridLayout>
     <Tabs #tabs [selectedIndex]="defaultSelected" (selectedIndexChanged)="onSelectedIndexChanged($event)">
-      <TabContentItem [backgroundColor]="tabList[0].bacskgroundColor">
+      <TabContentItem [backgroundColor]="tabList[0].backgroundColor">
         <ScrollView orientation="vertical">
           <GridLayout rows="*,*,*,*,*,*,*" columns="*" *ngIf="!DUSER">
             <StackLayout orientation="vertical" row="0" backgroundColor="lightgray">
@@ -107,8 +107,8 @@
             </StackLayout>
             <StackLayout orientation="vertical" row="6" verticalAlignment="middle" style="margin-bottom:200px">
 
-              <Label text="balance: 0" class="h3 text-center " horizontalAlignment="stretch"></Label>
-              <Label text="Address: 4fbqho4ufba49pufga9473" class="h3 text-center " horizontalAlignment="stretch"></Label>
+              <Label text="balance: {{DUSER.wallet[0].owo[0].owo_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
+              <Label text="{{DUSER.wallet[0].owo[0].owo_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
               <Button text="copy" (tap)="onCopy($event)" class="-primary -rounded-lg"></Button>
 
             </StackLayout>
@@ -160,7 +160,14 @@
 
             <StackLayout row="1" *ngIf="$gType=='global' && GLOBALGAMES && GLOBALGAMES.length>0">
               <CardView *ngFor="let data of GLOBALGAMES" (tap)="setGameId(data.game)">
-                <StackLayout orientation="horizontal" margin="12" class="text-center">
+                <StackLayout orientation="horizontal" margin="12" class="text-center" *ngIf="data.user_id!=user_id">
+                  <GridLayout rows="*,*" columns="*">
+                    <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
+                    <Label row="1" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
+
+                  </GridLayout>
+                </StackLayout>
+                <StackLayout orientation="horizontal" margin="12" class="text-center" backgroundColor="#F1F1F1" *ngIf="data.user_id==user_id">
                   <GridLayout rows="*,*" columns="*">
                     <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
                     <Label row="1" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
@@ -200,7 +207,12 @@
 
       <TabContentItem [backgroundColor]="tabList[2].backgroundColor">
         <ScrollView orientation="vertical">
-          <GridLayout rows="*,*,*,*,*" columns="*">
+          <GridLayout rows="*" columns="*" *ngIf="!Dgame">
+            <StackLayout orientation="vertical" verticalAlignment="middle" row="0">
+              <Label text="loading game..." class="h4 text-center p-t-20"></Label>
+            </StackLayout>
+          </GridLayout>
+          <GridLayout rows="*,*,*,*,*" columns="*" *ngIf="Dgame">
 
             <StackLayout orientation="vertical" row="0" *ngIf="Dgame && liveGame<1">
               <Label text="prize" class="h5 text-center p-t-20" horizontalAlignment="stretch" *ngIf="Dgame.details.started<1"></Label>
@@ -251,10 +263,13 @@
             <StackLayout orientation="vertical" row="2" verticalAlignment="middle">
 
               <CardView class="cardStyle" margin="10" elevation="40" radius="1" *ngIf="Dgame">
-                <GridLayout rows="*,*,*" columns="*">
-                  <Label text="game info" class="createdBy text-center h4" row="0" col="1" textWrap="true" horizontalAlignment="stretch"></Label>
-                  <Label text="{{Dgame.details.info}}" class="createdBy text-center  h3" row="1" col="1" textWrap="true" horizontalAlignment="stretch"></Label>
-                  <Label text="Free Grabs: {{Dgame.details.freeGrabs}}, Free Slaps: {{Dgame.details.freeGrabs}}, Free Sneaks: {{Dgame.details.freeSneaks}} " class="createdBy text-center h4" row="2" col="1" textWrap="true" horizontalAlignment="stretch"></Label>
+                <GridLayout rows="*,*,*,*,*,*" columns="*">
+                  <Label text="game info" class="createdBy text-center h4" row="0" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
+                  <Label text="{{Dgame.details.info}}" class="createdBy text-center  h3" row="1" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
+                  <Label text="Free Grabs: {{Dgame.details.freeGrabs}}, Free Slaps: {{Dgame.details.freeGrabs}}, Free Sneaks: {{Dgame.details.freeSneaks}} " class="createdBy text-center h4" row="2" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
+                  <Label text="Insert: {{Dgame.details.toPlayGrabs | number : '1.0-0'}} Grabs" class="text-center h3 textBold" row="3" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.toPlayGrabs>0"></Label>
+                  <Label text="Proof Of Prize  " class="text-center h5" row="4" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.prizeType=='btc'"></Label>
+                  <Label text="{{Dgame.details.btc_address}}" class="text-center h4 textBold" row="5" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.prizeType=='btc'" (tap)="onProve(Dgame.details.btc_address)"></Label>
 
                 </GridLayout>
 

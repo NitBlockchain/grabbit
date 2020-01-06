@@ -29,6 +29,7 @@ import { ItemEventData, ListView } from "tns-core-modules/ui/list-view";
 import * as SocialShare from "nativescript-social-share";
 import { ImageSource } from "image-source";
 import { HttpClient, HttpHeaders, } from "@angular/common/http";
+import * as utils from "tns-core-modules/utils/utils";
 
 @Component({
   selector: "Home",
@@ -74,6 +75,7 @@ export class HomeComponent implements AfterViewInit {
   $game: any
   $gType: string
   $gID: string
+  $setID: string
 
   token: string
   name: string
@@ -103,6 +105,7 @@ export class HomeComponent implements AfterViewInit {
   GLOBALGAMES: []
   LOCALGAMES: []
   WINS: []
+  BIZ: []
 
   OTIMER: any
   timer: any
@@ -158,76 +161,97 @@ export class HomeComponent implements AfterViewInit {
   ngAfterViewInit(): void {
 
     this.initializeTabBar();
+    // this.geo()
+    // this.bGeo()
 
   }
 
-  public geo() {
+  geo() {
+    this.zone.run(() => {
 
-    geolocation.isEnabled().then((isEnabled) => {
-      if (!isEnabled) {
-        geolocation.enableLocationRequest(true, true).then(() => {
-          console.log("User Enabled Location Service");
-        }, (e) => {
-          this.pop(e.message, 'error')
+      // console.log("getting geo again this time  it  will work")
 
-          console.log("Error: " + (e.message || e));
-        }).catch(ex => {
+      geolocation.isEnabled().then((isEnabled) => {
+        if (!isEnabled) {
+          geolocation.enableLocationRequest(true, true).then(() => {
+            console.log("User Enabled Location Service");
+          }, (e) => {
+            this.pop(e.message, 'error')
 
-          console.log("Unable to Enable Your Device Location", ex);
-        });
-      }
-    }, (e) => {
+            console.log("Error: " + (e.message || e));
+          }).catch(ex => {
 
-    });
+            console.log("Unable to Enable Your Device Location", ex);
+          });
+        }
+      }, (e) => {
+
+      });
+
+      this.cd.detectChanges();
+
+    })
+
   }
 
-  public bGeo() {
+  bGeo() {
 
-    let that = this;
-    geolocation.getCurrentLocation({
-      desiredAccuracy: Accuracy.high,
-      maximumAge: 5000,
-      timeout: 10000
-    }).then((loc: any) => {
-      if (loc) {
+    this.zone.run(() => {
 
-        that.locations.push(loc);
-        this.lat = loc.latitude
-        this.lng = loc.longitude
-        localStorage.setString('lat', JSON.stringify(this.lat))
-        localStorage.setString('lng', JSON.stringify(this.lng))
-        this.bLOCALGAMES()
-        // console.log(loc)
-      } else {
+      console.log("bGeo  reached")
+      geolocation.getCurrentLocation({
+        desiredAccuracy: Accuracy.high,
+        maximumAge: 5000,
+        timeout: 10000
+      }).then((loc: any) => {
+        if (loc) {
+
+          this.lat = loc.latitude
+          this.lng = loc.longitude
+          localStorage.setString('lat', JSON.stringify(this.lat))
+          localStorage.setString('lng', JSON.stringify(this.lng))
+          this.bGLOBALGAMES()
+
+          this.bLOCALGAMES()
+          // console.log(loc)
+        } else {
+
+          this.bGLOBALGAMES()
+          this.pop('unable to get your location, local games won\'t be available', 'errors')
+
+          // this.bGAMES()
+
+        }
+      }, (e) => {
 
         this.pop('unable to get your location, local games won\'t be available', 'errors')
 
-        // this.bGAMES()
+      });
+      this.cd.detectChanges();
 
-      }
-    }, (e) => {
+    })
 
-      this.pop('unable to get your location, local games won\'t be available', 'errors')
-
-    });
   }
-
   // --------------------------------------------------------------------
   // get stored  info
   gStorage() {
-
+    // console.log("getting storage")
     this.token = localStorage.getString('token')
     this.name = localStorage.getString('name')
     this.user = localStorage.getString('user')
+    this.lat = localStorage.getString('lat')
+    this.lng = localStorage.getString('lng')
+    // this.device = 'afkehofahoufhep'
+    // console.log('device is' + this.device)
     this.device = getUUID();
 
-    Telephony().then((resolved: any) => {
-
-      this.countryCode = resolved.countryCode
-      // this.pop(this.countryCode, 'success')
-    }).catch((error) => {
-
-    })
+    // Telephony().then((resolved: any) => {
+    //
+    //   this.countryCode = resolved.countryCode
+    //   // this.pop(this.countryCode, 'success')
+    // }).catch((error) => {
+    //   console.log(error)
+    // })
     if (isAndroid) {
       // console.log("android")
       // this.device = "android495775qafef4bi9"
@@ -241,7 +265,7 @@ export class HomeComponent implements AfterViewInit {
 
 
     if (this.user) {
-      // console.log("got user id stored")
+      console.log("got user id stored")
       this.gUSER()
       // this.bGAMES()
 
@@ -252,6 +276,20 @@ export class HomeComponent implements AfterViewInit {
       // this.bGAMES()
 
     }
+    if (this.lat && this.lng) {
+      // console.log("got  lat")
+      this.bGLOBALGAMES()
+      this.bLOCALGAMES()
+    } else {
+      this.bGLOBALGAMES()
+
+      // console.log("no lat")
+      this.pop("getting your location", 'success')
+      this.geo()
+      this.bGeo()
+
+    }
+
 
   }
 
@@ -268,9 +306,10 @@ export class HomeComponent implements AfterViewInit {
             this.zone.run(() => {
 
               let USER = jordi.payload[0]
+              this.BIZ = jordi.payload[1]
               this.WINS = jordi.payload[2]
               this.DUSER = USER
-              // console.log(USER)
+              console.log(USER)
 
               this.name = USER.profile.name || 'no user name set'
               this.avatar = USER.profile.avatar || '~/assets/imgs/avatars/alien_02.png'
@@ -284,8 +323,10 @@ export class HomeComponent implements AfterViewInit {
               this.cd.detectChanges();
 
             })
+
           } else {
 
+            console.log("no user")
             this.zone.run(() => {
 
               this.name = 'n/a'
@@ -435,6 +476,7 @@ export class HomeComponent implements AfterViewInit {
   }
   onCreate(type: any) {
 
+    console.log(type)
     setTimeout(() => {
 
       this.router.navigate(['/create/' + type], {
@@ -452,7 +494,14 @@ export class HomeComponent implements AfterViewInit {
         ACTIONS = ["admin", "chat", "how to play", "support", "about us", "user agreement", "privacy policy", "logout"]
 
       } else {
-        ACTIONS = ["chat", "how to play", "support", "about us", "user agreement", "privacy policy", "logout"]
+
+        if (this.BIZ && this.BIZ.length > 0) {
+          ACTIONS = ["business profile", "chat", "how to play", "support", "about us", "user agreement", "privacy policy", "logout"]
+
+        } else {
+          ACTIONS = ["chat", "how to play", "support", "about us", "user agreement", "privacy policy", "logout"]
+
+        }
 
       }
     } else {
@@ -488,35 +537,50 @@ export class HomeComponent implements AfterViewInit {
 
       } else if (result == 'support') {
 
-        setTimeout(() => {
+        utils.openUrl("https://grabbit.cheap/#/support")
 
-          this.router.navigate(['/support'], {
-            animated: true,
-            clearHistory: false
-          })
-        }, 300);
+        // setTimeout(() => {
+        //
+        //   this.router.navigate(['/support'], {
+        //     animated: true,
+        //     clearHistory: false
+        //   })
+        // }, 300);
       } else if (result == 'privacy policy') {
 
         setTimeout(() => {
 
-          this.router.navigate(['/legals/privacy'], {
-            animated: true,
-            clearHistory: false
-          })
+          utils.openUrl("https://grabbit.cheap/#/privacy")
+
+          // this.router.navigate(['/legals/privacy'], {
+          //   animated: true,
+          //   clearHistory: false
+          // })
         }, 300);
       } else if (result == 'user agreement') {
 
-        setTimeout(() => {
+        utils.openUrl("https://grabbit.cheap/#/agreement")
 
-          this.router.navigate(['/legals/agreement'], {
-            animated: true,
-            clearHistory: false
-          })
-        }, 300);
+        // setTimeout(() => {
+        //
+        //   this.router.navigate(['/legals/agreement'], {
+        //     animated: true,
+        //     clearHistory: false
+        //   })
+        // }, 300);
       } else if (result == 'how to play') {
 
         this.pop("slap before you grab, sneak after you grab. Don't let  the timer hit 0, if you are not the one who grabbed the prize. If you get slapped, grab again and again and again. Send us your video explaining how to play and you could win $1,000 in bitcoin videos must be in by 12/30/2019. send youtube link to cs@grabbit.cheap, subject how to play video", 'how to play')
 
+      } else if (result == 'business profile') {
+
+        setTimeout(() => {
+
+          this.router.navigate(['/profile-business'], {
+            animated: true,
+            clearHistory: false
+          })
+        }, 300);
       }
 
 
@@ -618,7 +682,6 @@ export class HomeComponent implements AfterViewInit {
       timer.clearTimeout(this.OTIMER);
     }
     this.OTIMER = timer.setInterval(() => {
-
       this.$game.onTimer(this.token, this.user, this.$gID)
         .subscribe(
           (jordi: any) => {
@@ -658,7 +721,7 @@ export class HomeComponent implements AfterViewInit {
                 this.cd.detectChanges();
 
               })
-                , console.log("timer running")
+              //console.log("timer running")
 
             } else {
               console.log("timer error")
@@ -668,7 +731,7 @@ export class HomeComponent implements AfterViewInit {
   }
 
   onPlay() {
-
+    console.log(this.lat, this.lng)
     this.$game.play(this.token, this.user, this.$gID)
       .subscribe(
         (jordi: any) => {
@@ -828,7 +891,7 @@ export class HomeComponent implements AfterViewInit {
   // login/register
 
   login(number: string) {
-
+    console.log(this.lat, this.lng, this.device)
     this.$game.login(number, this.device, this.lat, this.lng, this.countryCode)
       .subscribe(
         (jordi: any) => {
@@ -860,6 +923,7 @@ export class HomeComponent implements AfterViewInit {
             })
 
           } else {
+            this.pop(jordi.message, 'error')
 
           }
         })
@@ -924,7 +988,12 @@ export class HomeComponent implements AfterViewInit {
 
   onShare() {
 
-    SocialShare.shareUrl("https://www.nativescript.org/", "come play grabbit with me, we can win awesome prizes");
+    SocialShare.shareUrl("https://play.google.com/store/apps/details?id=grabbit.cheap", "come play grabbit with me, we can win awesome prizes together");
+  }
+
+  onProve(address: any) {
+
+    utils.openUrl("https://www.blockchain.com/btc/address/" + address)
   }
 
   onRedeem(qr) {
@@ -1010,10 +1079,17 @@ export class HomeComponent implements AfterViewInit {
       if (index != 2) {
 
         timer.clearTimeout(this.OTIMER);
+        this.$setID = null
 
       } else {
 
-        this.bGLOBALGAMES()
+        if (!this.$setID) {
+
+          this.bGLOBALGAMES()
+
+        }
+
+        this.gUSER()
         this.onTimer()
 
       }
@@ -1080,15 +1156,9 @@ export class HomeComponent implements AfterViewInit {
     tabContentsArr[this.defaultSelected].nativeElement.translateY = - 15;
     this.currentTabIndex = this.defaultSelected;
 
+    console.log("tabs initialized")
     //get user
     this.gStorage()
-
-    ///get user location
-    this.geo()
-    this.bGeo()
-
-    //get  global game
-    this.bGLOBALGAMES()
   }
 
   getSlideAnimation(index: number, duration: number) {
@@ -1125,6 +1195,7 @@ export class HomeComponent implements AfterViewInit {
       setTimeout(() => {
 
         this.$gID = gID
+        this.$setID = gID
         this.onBottomNavTap(2)
         this.cd.detectChanges();
 

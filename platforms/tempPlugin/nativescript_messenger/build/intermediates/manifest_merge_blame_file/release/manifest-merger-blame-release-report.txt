@@ -5,10 +5,10 @@
 5    android:versionName="1.0" >
 6
 7    <uses-sdk android:targetSdkVersion="26" />
-7-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/tempPlugin/nativescript_messenger/src/main/AndroidManifest.xml
+7-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/Grabbit/platforms/tempPlugin/nativescript_messenger/src/main/AndroidManifest.xml
 8
 9    <uses-permission android:name="android.permission.SEND_SMS" />
-9-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/tempPlugin/nativescript_messenger/src/main/AndroidManifest.xml:3:3-64
-9-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/FRONT/platforms/tempPlugin/nativescript_messenger/src/main/AndroidManifest.xml:3:20-62
+9-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/Grabbit/platforms/tempPlugin/nativescript_messenger/src/main/AndroidManifest.xml:3:3-64
+9-->/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/Grabbit/platforms/tempPlugin/nativescript_messenger/src/main/AndroidManifest.xml:3:20-62
 10
 11</manifest>

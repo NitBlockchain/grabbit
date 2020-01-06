@@ -26,7 +26,7 @@ import { AboutComponent } from "./about.component";
     NativeScriptFormsModule
   ],
   declarations: [
-    AboutComponent
+    //AboutComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

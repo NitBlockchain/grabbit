@@ -1,62 +1,63 @@
-.home-panel{
+.chat-header-icon {
+    margin-left: 15;
+    width: 32;
+    height: 32;
+    border-radius: 50%;
+}
+.chat-header-label {
     vertical-align: center;
-    font-size: 20;
-    margin: 15;
+    font-size: 16;
+    font-weight: bold;
+    padding: 15;
 }
 
-.description-label{
-    margin-bottom: 15;
+.message-item {
+    margin: 0;
+    padding: 5;
+}
+.message-avatar {
+    width: 25;
+    height: 25;
+    margin: 0 10;
+    border-radius: 50%;
+}
+.message-block {
+    padding: 3 10 10 10;
+    width: auto;
+    margin-right: 80;
+    border-radius: 10;
+    border-top-left-radius: 0;
+    background-color: #daf6ff;
+}
+.message-autor {
+    margin-bottom: 8;
+    font-size: 16;
+    font-weight: bold;
+}
+.message-body {
+    font-size: 14;
 }
 
-.fa-regular {
-  font-family: 'Font Awesome 5 Free', 'fa-solid-900';
-  font-weight: 900;
+.message-form {
+    padding: 10;
+    border-top-width: 0.5;
+    border-top-color: lightgray;
 }
-.gameImage {
-    width:25%;
-    margin: 10px;
-    border:5px solid red;
-    border-radius: 500px;
-    -webkit-border-radius: 500px;
-    -moz-border-radius: 500px;
-}
-
-.textBold{
-  font-weight: bold;
+.chat-textfield {
+    font-size: 15;
+    placeholder-color: darkgray;
+    background: whitesmoke;
+    border-color: white;
+    padding: 10;
+    margin: 0 5;
+    border-radius: 20;
 }
 
-.grab{
-  /* Oval: */
-background: #F25222;
-border-radius: 500px;
-color:white;
-font-weight: bold;
-width:100px;
-height:200px
-}
-
-.slap{
-  /* Oval: */
-background: #F2226B;
-border-radius: 500px;
-color:#F2F022;
-font-weight: bold;
-
-
-}
-.sneak{
-  /* Oval: */
-background: #F2226B;
-border-radius: 500px;
-color:#22F227;
-font-weight: bold;
-
-
-}
-.avatars{
-  /* user: */
-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
-height:auto;
-width:200px
-
+.chat-btn-send {
+    color: white;
+    font-size: 16;
+    font-weight: bold;
+    background-color: #44d2a6;
+    height: 40;
+    border-radius: 20;
 }

@@ -4,7 +4,7 @@ require("./runtime.js");require("./vendor.js");module.exports =
 /***/ 164:
 /***/ (function(module) {
 
-module.exports = {"android":{"v8Flags":"--expose_gc","forceLog":true,"markingMode":"none"},"main":"main.js","name":"Grabbit","version":"3.1.1","dependencies":{}};
+module.exports = {"android":{"v8Flags":"--expose_gc","forceLog":true,"markingMode":"none"},"main":"main.js","name":"grabbit.cheap","version":"3.1.1","dependencies":{}};
 
 /***/ }),
 
@@ -70,10 +70,10 @@ var app_component_AppComponent = /** @class */ (function () {
 var nativescript_angular_forms = __webpack_require__(267);
 
 // EXTERNAL MODULE: ../node_modules/@angular/forms/fesm5/forms.js
-var fesm5_forms = __webpack_require__(13);
+var fesm5_forms = __webpack_require__(12);
 
 // EXTERNAL MODULE: ../node_modules/nativescript-angular/router/index.js
-var router = __webpack_require__(37);
+var router = __webpack_require__(28);
 
 // EXTERNAL MODULE: ../node_modules/@angular/common/fesm5/common.js
 var common = __webpack_require__(5);
@@ -111,16 +111,16 @@ var about_component_AboutComponent = /** @class */ (function () {
 
 
 // EXTERNAL MODULE: ../node_modules/@angular/router/fesm5/router.js + 14 modules
-var fesm5_router = __webpack_require__(23);
+var fesm5_router = __webpack_require__(17);
 
 // EXTERNAL MODULE: ./services/game.ts
-var game = __webpack_require__(87);
+var game = __webpack_require__(51);
 
 // EXTERNAL MODULE: ../node_modules/tns-core-modules/ui/dialogs/dialogs.js
-var dialogs = __webpack_require__(22);
+var dialogs = __webpack_require__(14);
 
 // EXTERNAL MODULE: ../node_modules/tns-core-modules/platform/platform.js
-var platform = __webpack_require__(18);
+var platform = __webpack_require__(20);
 
 // EXTERNAL MODULE: ../node_modules/nativescript-uuid/index.js
 var nativescript_uuid = __webpack_require__(270);
@@ -133,7 +133,7 @@ var nativescript_uuid = __webpack_require__(270);
 
 
 
-var localStorage = __webpack_require__(158);
+var localStorage = __webpack_require__(129);
 
 
 
@@ -161,7 +161,7 @@ var create_component_CreateComponent = /** @class */ (function () {
             _this.lng = localStorage.getString('lng');
             _this.device = Object(nativescript_uuid["getUUID"])();
             if (platform["isAndroid"]) {
-                // console.log("android")
+                console.log("this  is  an android device");
                 // this.device = "android495775qafef4bi9"
             }
             else {
@@ -229,12 +229,15 @@ var create_component_CreateComponent = /** @class */ (function () {
         else if (this.prizeType == 'free item  with  purchase' && !this.price) {
             this.pop("whats the price of the  item to purchase?", "error");
         }
+        else if (this.prizeType == 'mystery box' && !this.mysteryBoxValue) {
+            this.pop("whats the value of the mystery box?", "error");
+        }
         else if (!this.details) {
             this.pop("whats the prize details?", "error");
         }
         else {
             var total = this.maxPlayers * this.playerFee;
-            this.$game.gCREATECOUPON(this.token, this.user, this.prizeType, this.gameTitle, this.maxPlayers, this.prize, this.prize2, this.price, total)
+            this.$game.gCREATECOUPON(this.token, this.user, this.prizeType, this.gameTitle, this.maxPlayers, this.prize, this.prize2, this.price, total, this.mysteryBoxValue)
                 .subscribe(function (jordi) {
                 if (jordi.success) {
                     _this.pop(jordi.message, "success");
@@ -316,6 +319,9 @@ var create_component_CreateComponent = /** @class */ (function () {
             if (prizeType == 'free item  with  purchase') {
                 _this.playerFee = 1;
             }
+            if (prizeType == 'mystery box') {
+                _this.playerFee = 1;
+            }
             if (_this.BIZ && _this.BIZ.length < 1) {
                 // console.log(this.showBizForm)
                 _this.pop("lets create your business profile 1st", "error");
@@ -344,6 +350,37 @@ var create_component_CreateComponent = /** @class */ (function () {
             }
             _this.cd.detectChanges();
         });
+    };
+    CreateComponent.prototype.uploads = function () {
+        // window.addEventListener('DOMContentLoaded', () => {
+        //
+        //   const onProgress = (evt) => {
+        //     document.getElementById('progress').innerHTML = `${evt.totalPercent}%`;
+        //   };
+        //
+        //   document.querySelector('input').addEventListener('change', (event: any) => {
+        //     const files = event.target.files;
+        //     const token = {};
+        //     const cancel = document.getElementById('cancel');
+        //     const pause = document.getElementById('pause');
+        //     const resume = document.getElementById('resume');
+        //
+        //     [cancel, resume, pause].forEach((btn) => {
+        //       const id = btn.id;
+        //       btn.addEventListener('click', () => {
+        //         token[id]();
+        //       });
+        //     });
+        //
+        //     fileStack.upload(files, { onProgress }, {}, token)
+        //       .then(res => {
+        //         console.log('success: ', res)
+        //       })
+        //       .catch(err => {
+        //         console.log(err)
+        //       });
+        //   });
+        // });
     };
     CreateComponent.prototype.takePicture = function () {
         // Camera.takePicture({ saveToGallery: false, width: 320, height: 240 }).then((picture: any) => {
@@ -521,7 +558,7 @@ var create_component_CreateComponent = /** @class */ (function () {
 
 
 
-var create_business_component_localStorage = __webpack_require__(158);
+var create_business_component_localStorage = __webpack_require__(129);
 // var FileSystem = require("file-system");
 // var BackgroundHttp = require("nativescript-background-http");
 // var MD5 = require("blueimp-md5");
@@ -872,7 +909,135 @@ var legals_component_LegalsComponent = /** @class */ (function () {
 }());
 
 
+// CONCATENATED MODULE: ./profile-business/profile-business.component.ts
+
+
+
+
+
+
+
+var profile_business_component_localStorage = __webpack_require__(129);
+// var FileSystem = require("file-system");
+// var BackgroundHttp = require("nativescript-background-http");
+// var MD5 = require("blueimp-md5");
+
+var profile_business_component_ProfileBusinessComponent = /** @class */ (function () {
+    function ProfileBusinessComponent(_game, zone, cd, location, router, route, formBuilder) {
+        this._game = _game;
+        this.zone = zone;
+        this.cd = cd;
+        this.location = location;
+        this.router = router;
+        this.route = route;
+        this.formBuilder = formBuilder;
+        this.$game = _game;
+    }
+    ProfileBusinessComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.zone.run(function () {
+            _this.token = profile_business_component_localStorage.getString('token');
+            _this.name = profile_business_component_localStorage.getString('name');
+            _this.user = profile_business_component_localStorage.getString('user');
+            _this.lat = profile_business_component_localStorage.getString('lat');
+            _this.lng = profile_business_component_localStorage.getString('lng');
+            _this.gUSER();
+            _this.cd.detectChanges();
+        });
+    };
+    ProfileBusinessComponent.prototype.gUSER = function () {
+        var _this = this;
+        console.log("getting the user and biz");
+        this.$game.gUSER(this.token, this.user, this.lat, this.lng)
+            .subscribe(function (jordi) {
+            if (jordi.success) {
+                _this.zone.run(function () {
+                    _this.USER = jordi.payload[0];
+                    _this.BIZ = jordi.payload[1];
+                    // console.log(jordi.payload)
+                    // console.log(this.BIZ)
+                    _this.cd.detectChanges();
+                });
+            }
+            else {
+                _this.BIZ = [];
+                _this.USER = [];
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    ProfileBusinessComponent.prototype.scan = function () {
+        var _this = this;
+        dialogs["prompt"]({
+            title: "Enter Code",
+            message: "have the winner show you the game code",
+            okButtonText: "confirm",
+            cancelButtonText: "cancel",
+            inputType: dialogs["inputType"].number
+        }).then(function (r) {
+            if (r.text) {
+                _this.redeem(r.text);
+            }
+            else {
+            }
+            // console.log("Dialog result: " + r.result + ", text: " + r.text);
+        });
+    };
+    ProfileBusinessComponent.prototype.redeem = function (code) {
+        var _this = this;
+        this.$game.gREDEEM(this.token, this.user, code)
+            .subscribe(function (jordi) {
+            if (jordi.success) {
+                _this.zone.run(function () {
+                    _this.pop('prize claimed', 'success');
+                    _this.cd.detectChanges();
+                });
+            }
+            else {
+                _this.pop(jordi.message, 'success');
+            }
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    ProfileBusinessComponent.prototype.pop = function (message, type) {
+        var options = {
+            title: type,
+            message: message,
+            okButtonText: "OK"
+        };
+        Object(dialogs["confirm"])(options).then(function () {
+            // console.log("Race chosen!");
+        });
+    };
+    ProfileBusinessComponent.prototype.goBack = function () {
+        this.location.back();
+    };
+    ProfileBusinessComponent.ctorParameters = function () { return [
+        { type: game["a" /* GameProvider */] },
+        { type: core["NgZone"] },
+        { type: core["ChangeDetectorRef"] },
+        { type: common["Location"] },
+        { type: router["RouterExtensions"] },
+        { type: fesm5_router["ActivatedRoute"] },
+        { type: fesm5_forms["FormBuilder"] }
+    ]; };
+    ProfileBusinessComponent = __decorate([
+        Object(core["Component"])({
+            selector: "Profile-business",
+            template: __importDefault(__webpack_require__(435)).default,
+            changeDetection: core["ChangeDetectionStrategy"].OnPush,
+            styles: [__importDefault(__webpack_require__(436)).default]
+        }),
+        __metadata("design:paramtypes", [game["a" /* GameProvider */], core["NgZone"], core["ChangeDetectorRef"], common["Location"], router["RouterExtensions"], fesm5_router["ActivatedRoute"], fesm5_forms["FormBuilder"]])
+    ], ProfileBusinessComponent);
+    return ProfileBusinessComponent;
+}());
+
+
 // CONCATENATED MODULE: ./app-routing.module.ts
+
 
 
 
@@ -882,12 +1047,13 @@ var legals_component_LegalsComponent = /** @class */ (function () {
 
 var routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
-    { path: "home", loadChildren: function () { return Promise.all(/* import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, 477)).then(function (m) { return m.HomeModule; }); } },
+    { path: "home", loadChildren: function () { return Promise.all(/* import() */[__webpack_require__.e(0), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, 478)).then(function (m) { return m.HomeModule; }); } },
     { path: "about", component: about_component_AboutComponent },
     { path: "create/:type", component: create_component_CreateComponent },
     { path: "create-business", component: create_business_component_CreateBusinessComponent },
     { path: "support", component: support_component_SupportComponent },
-    { path: "legals/:type", component: legals_component_LegalsComponent }
+    { path: "legals/:type", component: legals_component_LegalsComponent },
+    { path: "profile-business", component: profile_business_component_ProfileBusinessComponent }
 ];
 // export const navigatableComponents = [
 //   AboutComponent,
@@ -922,6 +1088,7 @@ var http_client = __webpack_require__(291);
 
 
 
+
 var app_module_AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -943,7 +1110,8 @@ var app_module_AppModule = /** @class */ (function () {
                 create_component_CreateComponent,
                 create_business_component_CreateBusinessComponent,
                 support_component_SupportComponent,
-                legals_component_LegalsComponent
+                legals_component_LegalsComponent,
+                profile_business_component_ProfileBusinessComponent
             ],
             schemas: [
                 core["NO_ERRORS_SCHEMA"]
@@ -967,9 +1135,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 /* harmony import */ var _app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(292);
 
-        let applicationCheckPlatform = __webpack_require__(14);
+        let applicationCheckPlatform = __webpack_require__(15);
         if (applicationCheckPlatform.android && !global["__snapshot"]) {
-            __webpack_require__(53);
+            __webpack_require__(54);
 __webpack_require__(355);
         }
 
@@ -1020,7 +1188,7 @@ module.exports = ".home-panel{\n    vertical-align: center;\n    font-size: 20;\
 /***/ 427:
 /***/ (function(module, exports) {
 
-module.exports = "<ActionBar title=\"Grabbit\" class=\"h1\">\n\n</ActionBar>\n<ScrollView class=\"page\">\n\n  <GridLayout rows=\"*,*\" columns=\"*\" *ngIf=\"showBizForm\">\n    <GridLayout rows=\"*,*,*,*\" columns=\"*\">\n\n      <StackLayout orientation=\"vertical\" row=\"0\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"create your business profile\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n\n      <StackLayout row=\"2\">\n        <GridLayout rows=\"*, *, *, *, *,*,*\" columns=\"80, *\" class=\"form\">\n\n          <ListPicker  row=\"0\" colSpan=\"2\" [items]=\"bizType\" selectedIndex=\"0\" (selectedIndexChange)=\"onSelectedIndexChanged($event)\"></ListPicker>\n          <Label row=\"1\" col=\"0\" text=\"Name\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"1\" col=\"1\" [(ngModel)]=\"bizName\" hint=\"business name\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Label row=\"2\" col=\"0\" text=\"Address\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"2\" col=\"1\" [(ngModel)]=\"address\" hint=\"business addrerss\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Label row=\"3\" col=\"0\" text=\"Phone\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"3\" col=\"1\" [(ngModel)]=\"phone\" hint=\"phone\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Label row=\"4\" col=\"0\" text=\"Email\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"4\" col=\"1\" [(ngModel)]=\"email\" hint=\"your business email\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n\n          <Label row=\"5\" col=\"0\" text=\"Story\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"5\" col=\"1\" [(ngModel)]=\"story\" hint=\"your business story\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Button row=\"6\" colSpan=2 text=\"save\" (tap)=\"gSAVE()\" horizontalAlignment=\"stretch\" class=\"-primary\" *ngIf=\"story\"></Button>\n\n        </GridLayout>\n      </StackLayout>\n\n    </GridLayout>\n  </GridLayout>\n\n  <GridLayout rows=\"*,*\" columns=\"*\" *ngIf=\"showGameForm\">\n    <GridLayout rows=\"*,*,*,*\" columns=\"*\">\n\n      <StackLayout orientation=\"vertical\" row=\"0\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"creating {{prizeType}} game for\" class=\"h4 text-center p-t-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n\n\n      <StackLayout orientation=\"vertical\" row=\"1\" backgroundColor=\"#F1F1F1\">\n\n        <Label [text]=\"BIZ[0].profile[0].name\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\"></Label>\n        <Label [text]=\"BIZ[0].profile[0].address\" class=\"h3 text-center\" horizontalAlignment=\"stretch\"></Label>\n        <Label [text]=\"BIZ[0].profile[0].phone\" class=\"h3 text-center  p-b-20\" horizontalAlignment=\"stretch\"></Label>\n\n      </StackLayout>\n      <StackLayout row=\"2\">\n        <GridLayout rows=\"*, *, *, *, *,*,*\" columns=\"80, *, 80\" class=\"form\">\n\n          <TextField row=\"1\" col=\"1\" [(ngModel)]=\"gameTitle\" hint=\"game title\" class=\"input input-border p-t-20\" maxLength=\"24\"></TextField>\n          <TextField row=\"2\" col=\"1\" [(ngModel)]=\"maxPlayers\" hint=\"max players\" class=\"input input-border p-t-20\" keyboardType=\"number\" maxLength=\"2\"></TextField>\n          <TextField row=\"3\" col=\"1\" [(ngModel)]=\"prize\" hint=\"winner gets a 25% off coupon\" class=\"input input-border p-t-20\" maxLength=\"45\"></TextField>\n\n          <TextField row=\"4\" col=\"1\" [(ngModel)]=\"prize2\" hint=\"none winners get a 10% off coupon\" class=\"input input-border p-t-20\" maxLength=\"45\" *ngIf=\"prizeType=='everyone wins'\"></TextField>\n\n          <TextField row=\"4\" col=\"1\" [(ngModel)]=\"price\" hint=\"buy $30 item\" class=\"input input-border p-t-20\"  maxLength=\"24\" *ngIf=\"prizeType=='free item  with  purchase'\"></TextField>\n          <TextField row=\"5\" col=\"1\" [(ngModel)]=\"details\" hint=\"prize details\" class=\"input input-border p-t-20\"  maxLength=\"150\"></TextField>\n\n          <Button row=\"6\" col='1' text=\"create local game\" (tap)=\"gCreateCoupon()\" horizontalAlignment=\"stretch\" class=\"-primary p-b-20\"></Button>\n\n        </GridLayout>\n      </StackLayout>\n\n\n      <StackLayout orientation=\"vertical\" row=\"4\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"total USD: ${{maxPlayers*playerFee || 0 | number : '1.2-2'}}\" class=\"h2 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n        <Label text=\"1 btc = ${{btc_value}}\" class=\"h4 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n\n        <Label text=\"Winner(s) must redeem coupon within 72  hours\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n        <Label text=\"If less than the max number of players play your game, the difference will be returned to your wallet\" class=\"h3 text-center p-t-10\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"21\"></Label>\n\n      </StackLayout>\n    </GridLayout>\n  </GridLayout>\n\n  <GridLayout rows=\"*,*\" columns=\"*\" *ngIf=\"!showBizForm\">\n    <GridLayout rows=\"*,*\" columns=\"*\">\n      <StackLayout orientation=\"vertical\" row=\"0\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"create {{type}} game\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n      <StackLayout orientation=\"vertical\" row=\"0\">\n\n        <Label text=\"create {{type}} game\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n      <StackLayout orientation=\"vertical\" row=\"1\" *ngIf=\"type=='coupon'\">\n\n        <GridLayout rows=\"*,*,*,*,*,*,*,*,*,*\" columns=\"*\">\n\n          <StackLayout class=\"p-20\" row=\"0\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Grabbit is an awesome way to engage locals with deals and discounts. It costs as little as $0.65 per player competing for your coupon. Games are geo fenced to locals within 10 miles. Locals play FREE to win your coupon\"\n                  class=\"h3 p-20 text-center\" textWrap=\"true\" lineHeight='12'></Label>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n          <StackLayout orientation=\"vertical\" row=\"1\" backgroundColor=\"#F1F1F1\">\n\n            <Label text=\"Game Types\" class=\"h2 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"2\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"1 Winner\" class=\"m-b-10 h3\" />\n                <Label text=\"only one player wins\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$0.65 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('1 winner')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"3\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Everyone Wins\" class=\"m-b-10 h3\" />\n                <Label text=\"winner gets a 50% off coupon, all other players get a 15% off coupon (example)\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$1.75 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('everyone wins')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"4\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Winner Must Bring A Friend\" class=\"m-b-10 h3\" />\n                <Label text=\"winner must bring a friend to redeem the coupon\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$1 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('winner must bring a friend')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"5\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Free item with purchase\" class=\"m-b-10 h3\" />\n                <Label text=\"winner gets a free item, with purchase\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$1 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('free item  with  purchase')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n          <StackLayout orientation=\"vertical\" row=\"6\" backgroundColor=\"#F1F1F1\">\n\n            <Label text=\"FAQ's\" class=\"h2 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n          </StackLayout>\n          <StackLayout class=\"p-20\" row=\"7\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Explain per player pricing\" class=\"m-b-10 h2\" />\n                <Label text=\"when creating your game, you choose the max number of players for your game. If you choose 10 max players for a 1 winner game, it will cost $6.50\" class=\"m-b-20 h3\" textWrap=\"true\" lineHeight=\"12\" />\n                <Label text=\"if less than 10 players join the game, the difference will be returned to your bitcoin wallet\" class=\"m-b-10 h3\" textWrap=\"true\" lineHeight=\"12\" />\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"8\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Whats the incentive for players to redeem their coupons?\" class=\"m-b-10 h2\" textWrap=\"true\" />\n                <Label text=\"Players are rewarded when they redeem their coupons, from reward points to free tools and to other perks. Players may also be penalized for not redeeming their wins\" class=\"m-b-20 h3\" textWrap=\"true\" lineHeight=\"12\" />\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n          <StackLayout class=\"p-20\" row=\"9\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Can I extend the local radius to 20 miles?\" class=\"m-b-10 h2\" textWrap=\"true\" />\n                <Label text=\"Yes, with a premium feature\" class=\"m-b-20 h3\" textWrap=\"true\" lineHeight=\"12\" />\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n        </GridLayout>\n      </StackLayout>\n\n      <StackLayout orientation=\"vertical\" row=\"1\" *ngIf=\"type=='bitcoin'\">\n\n        <GridLayout rows=\"*,*\" columns=\"*\">\n          <StackLayout orientation=\"vertical\" row=\"0\">\n\n              <GridLayout rows=\"*, *, *, *, *,*,*\" columns=\"80, *, 80\" class=\"form\">\n\n                <TextField row=\"0\" col=\"1\" [(ngModel)]=\"gameTitle\" hint=\"game title\" class=\"input input-border p-t-20\" maxLength=\"24\"></TextField>\n                <TextField row=\"1\" col=\"1\" [(ngModel)]=\"prize\" hint=\"prize in btc (.001)\" class=\"input input-border p-t-20\" keyboardType=\"number\" maxLength=\"6\"></TextField>\n                <TextField row=\"2\" col=\"1\" [(ngModel)]=\"details\" hint=\"prize details\" class=\"input input-border p-t-20\"  maxLength=\"150\"></TextField>\n                <TextField row=\"3\" col=\"1\" [(ngModel)]=\"gameLat\" hint=\"geo fence to latitude\" class=\"input input-border p-t-20\"  maxLength=\"150\" *ngIf=\"admin>0\"></TextField>\n                <TextField row=\"4\" col=\"1\" [(ngModel)]=\"gameLng\" hint=\"geo fence to longitude\" class=\"input input-border p-t-20\"  maxLength=\"150\" *ngIf=\"admin>0\"></TextField>\n\n                <Button row=\"5\" col='1' text=\"create bitcoin game\" (tap)=\"gCreateBTC()\" horizontalAlignment=\"stretch\" class=\"-primary p-b-20\" *ngIf=\"user\"></Button>\n                <Button row=\"5\" col='1' text=\"login/signup\" (tap)=\"login()\" horizontalAlignment=\"stretch\" class=\"-primary p-b-20\" *ngIf=\"!user\"></Button>\n\n              </GridLayout>\n          </StackLayout>\n\n          <StackLayout orientation=\"vertical\" row=\"1\" backgroundColor=\"#F1F1F1\">\n            <Label text=\"prize value: ${{btc_value*prize || 0 | number : '1.2-2'}}\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\" *ngIf=\"user\"></Label>\n\n            <Label text=\"How This works\" class=\"h2 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n            <Label text=\"When you create a bitcoin game, you are offering $5 in bitcoin (for example) as a prize up for grabs. Your game will require a minimum of 10 players, with a play fee of 2 grabs (or $0.50). Like inserting quarters into an arcade. Players get x number of free grabs, slaps and sneaks to play\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n\n            <Label text=\"10 x  $0.50 covers your $5 in bitcoin. If 20 players join the game,  there's an overage of $5. 75% of that is yours. \" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n            <Label text=\"If your game is not successful, cancel it and your bitcoins are sent back to your wallet.\" class=\"h3 text-center p-t-10\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n            <Label text=\"max players 25, max prize amount $25\" class=\"h3 text-center p-t-10\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n\n          </StackLayout>\n\n        </GridLayout>\n      </StackLayout>\n    </GridLayout>\n\n  </GridLayout>\n</ScrollView>\n"
+module.exports = "<ActionBar title=\"Grabbit\" class=\"h1\">\n\n</ActionBar>\n<ScrollView class=\"page\">\n\n  <GridLayout rows=\"*,*\" columns=\"*\" *ngIf=\"showBizForm\">\n    <GridLayout rows=\"*,*,*,*\" columns=\"*\">\n\n      <StackLayout orientation=\"vertical\" row=\"0\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"create your business profile\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n\n      <StackLayout row=\"2\">\n        <GridLayout rows=\"*, *, *, *, *,*,*\" columns=\"80, *\" class=\"form\">\n\n          <ListPicker  row=\"0\" colSpan=\"2\" [items]=\"bizType\" selectedIndex=\"0\" (selectedIndexChange)=\"onSelectedIndexChanged($event)\"></ListPicker>\n          <Label row=\"1\" col=\"0\" text=\"Name\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"1\" col=\"1\" [(ngModel)]=\"bizName\" hint=\"business name\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Label row=\"2\" col=\"0\" text=\"Address\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"2\" col=\"1\" [(ngModel)]=\"address\" hint=\"business addrerss\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Label row=\"3\" col=\"0\" text=\"Phone\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"3\" col=\"1\" [(ngModel)]=\"phone\" hint=\"phone\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Label row=\"4\" col=\"0\" text=\"Email\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"4\" col=\"1\" [(ngModel)]=\"email\" hint=\"your business email\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n\n          <Label row=\"5\" col=\"0\" text=\"Story\" horizontalAlignment=\"right\" class=\"label\" *ngIf=\"bType\"></Label>\n          <TextField row=\"5\" col=\"1\" [(ngModel)]=\"story\" hint=\"your business story\" class=\"input input-border\" *ngIf=\"bType\"></TextField>\n          <Button row=\"6\" colSpan=2 text=\"save\" (tap)=\"gSAVE()\" horizontalAlignment=\"stretch\" class=\"-primary\" *ngIf=\"story\"></Button>\n\n        </GridLayout>\n      </StackLayout>\n\n    </GridLayout>\n  </GridLayout>\n\n  <GridLayout rows=\"*,*\" columns=\"*\" *ngIf=\"showGameForm\">\n    <GridLayout rows=\"*,*,*,*\" columns=\"*\">\n\n      <StackLayout orientation=\"vertical\" row=\"0\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"creating {{prizeType}} game for\" class=\"h4 text-center p-t-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n\n\n      <StackLayout orientation=\"vertical\" row=\"1\" backgroundColor=\"#F1F1F1\">\n\n        <Label [text]=\"BIZ[0].profile[0].name\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\"></Label>\n        <Label [text]=\"BIZ[0].profile[0].address\" class=\"h3 text-center\" horizontalAlignment=\"stretch\"></Label>\n        <Label [text]=\"BIZ[0].profile[0].phone\" class=\"h3 text-center  p-b-20\" horizontalAlignment=\"stretch\"></Label>\n\n      </StackLayout>\n      <StackLayout row=\"2\">\n        <GridLayout rows=\"*, *, *, *, *,*,*\" columns=\"80, *, 80\" class=\"form\">\n\n          <TextField row=\"1\" col=\"1\" [(ngModel)]=\"gameTitle\" hint=\"game title\" class=\"input input-border p-t-20\" maxLength=\"24\"></TextField>\n          <TextField row=\"2\" col=\"1\" [(ngModel)]=\"maxPlayers\" hint=\"max players\" class=\"input input-border p-t-20\" keyboardType=\"number\" maxLength=\"2\"></TextField>\n          <TextField row=\"3\" col=\"1\" [(ngModel)]=\"prize\" hint=\"winner gets a 25% off coupon\" class=\"input input-border p-t-20\" maxLength=\"45\"></TextField>\n\n          <TextField row=\"4\" col=\"1\" [(ngModel)]=\"prize2\" hint=\"none winners get a 10% off coupon\" class=\"input input-border p-t-20\" maxLength=\"45\" *ngIf=\"prizeType=='everyone wins'\"></TextField>\n          <TextField row=\"4\" col=\"1\" [(ngModel)]=\"price\" hint=\"buy $30 item\" class=\"input input-border p-t-20\"  maxLength=\"24\" *ngIf=\"prizeType=='free item  with  purchase'\"></TextField>\n\n          <TextField row=\"4\" col=\"1\" [(ngModel)]=\"mysteryBoxValue\" hint=\"$25 value\" class=\"input input-border p-t-20\"  maxLength=\"24\" *ngIf=\"prizeType=='mystery box'\"></TextField>\n          <TextField row=\"5\" col=\"1\" [(ngModel)]=\"details\" hint=\"prize details\" class=\"input input-border p-t-20\"  maxLength=\"150\"></TextField>\n\n          <Button row=\"6\" col='1' text=\"create local game\" (tap)=\"gCreateCoupon()\" horizontalAlignment=\"stretch\" class=\"-primary p-b-20\"></Button>\n\n        </GridLayout>\n      </StackLayout>\n\n\n      <StackLayout orientation=\"vertical\" row=\"4\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"total USD: ${{maxPlayers*playerFee || 0 | number : '1.2-2'}}\" class=\"h2 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n        <Label text=\"1 btc = ${{btc_value}}\" class=\"h4 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n\n        <Label text=\"Winner(s) must redeem coupon within 72  hours\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n        <Label text=\"If less than the max number of players play your game, the difference will be returned to your wallet\" class=\"h3 text-center p-t-10\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"21\"></Label>\n\n      </StackLayout>\n    </GridLayout>\n  </GridLayout>\n\n  <GridLayout rows=\"*,*\" columns=\"*\" *ngIf=\"!showBizForm\">\n    <GridLayout rows=\"*,*\" columns=\"*\">\n      <StackLayout orientation=\"vertical\" row=\"0\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"create {{type}} game\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n      <StackLayout orientation=\"vertical\" row=\"0\">\n\n        <Label text=\"create {{type}} game\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n      <StackLayout orientation=\"vertical\" row=\"1\" *ngIf=\"type=='coupon'\">\n\n        <GridLayout rows=\"*,*,*,*,*,*,*,*,*,*,*\" columns=\"*\">\n\n          <StackLayout class=\"p-20\" row=\"0\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Grabbit is an awesome way to engage locals with deals and discounts. It costs as little as $0.65 per player competing for your coupon. Games are geo fenced to locals within 10 miles. Locals play FREE to win your coupon\"\n                  class=\"h3 p-20 text-center\" textWrap=\"true\" lineHeight='12'></Label>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n          <StackLayout orientation=\"vertical\" row=\"1\" backgroundColor=\"#F1F1F1\">\n\n            <Label text=\"Game Types\" class=\"h2 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"2\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"1 Winner\" class=\"m-b-10 h3\" />\n                <Label text=\"only one player wins\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$0.65 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('1 winner')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"3\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Everyone Wins\" class=\"m-b-10 h3\" />\n                <Label text=\"winner gets a 50% off coupon, all other players get a 15% off coupon (example)\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$1.75 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('everyone wins')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"4\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Winner Must Bring A Friend\" class=\"m-b-10 h3\" />\n                <Label text=\"winner must bring a friend to redeem the coupon\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$1 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('winner must bring a friend')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"5\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Free item with purchase\" class=\"m-b-10 h3\" />\n                <Label text=\"winner gets a free item, with purchase\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$1 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('free item  with  purchase')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"6\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Mystery Box\" class=\"m-b-10 h3\" />\n                <Label text=\"winner gets a mystery box\" class=\"m-b-10 h3\" textWrap=\"true\" />\n                <Label text=\"$1 per player\" class=\"m-b-10 h3\" />\n                <Button text=\"create\" (tap)=\"onCreate('mystery box')\" class=\"-primary -rounded-lg\"></Button>\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n          <StackLayout orientation=\"vertical\" row=\"7\" backgroundColor=\"#F1F1F1\">\n\n            <Label text=\"FAQ's\" class=\"h2 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n          </StackLayout>\n          <StackLayout class=\"p-20\" row=\"8\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Explain per player pricing\" class=\"m-b-10 h2\" />\n                <Label text=\"when creating your game, you choose the max number of players for your game. If you choose 10 max players for a 1 winner game, it will cost $6.50\" class=\"m-b-20 h3\" textWrap=\"true\" lineHeight=\"12\" />\n                <Label text=\"if less than 10 players join the game, the difference will be returned to your bitcoin wallet\" class=\"m-b-10 h3\" textWrap=\"true\" lineHeight=\"12\" />\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n\n          <StackLayout class=\"p-20\" row=\"9\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Whats the incentive for players to redeem their coupons?\" class=\"m-b-10 h2\" textWrap=\"true\" />\n                <Label text=\"Players are rewarded when they redeem their coupons, from reward points to free tools and to other perks. Players may also be penalized for not redeeming their wins\" class=\"m-b-20 h3\" textWrap=\"true\" lineHeight=\"12\" />\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n          <StackLayout class=\"p-20\" row=\"10\">\n            <Card:CardView class=\"cardStyle\">\n              <StackLayout class=\"cardContent\">\n                <Label text=\"Can I extend the local radius to 20 miles?\" class=\"m-b-10 h2\" textWrap=\"true\" />\n                <Label text=\"Yes, with a premium feature\" class=\"m-b-20 h3\" textWrap=\"true\" lineHeight=\"12\" />\n\n              </StackLayout>\n            </Card:CardView>\n          </StackLayout>\n        </GridLayout>\n      </StackLayout>\n\n      <StackLayout orientation=\"vertical\" row=\"1\" *ngIf=\"type=='bitcoin'\">\n\n        <GridLayout rows=\"*,*\" columns=\"*\">\n          <StackLayout orientation=\"vertical\" row=\"0\">\n\n              <GridLayout rows=\"*, *, *, *, *,*,*\" columns=\"80, *, 80\" class=\"form\">\n\n                <TextField row=\"0\" col=\"1\" [(ngModel)]=\"gameTitle\" hint=\"game title\" class=\"input input-border p-t-20\" maxLength=\"24\"></TextField>\n                <TextField row=\"1\" col=\"1\" [(ngModel)]=\"prize\" hint=\"prize in btc (.001)\" class=\"input input-border p-t-20\" keyboardType=\"number\" maxLength=\"6\"></TextField>\n                <TextField row=\"2\" col=\"1\" [(ngModel)]=\"details\" hint=\"prize details\" class=\"input input-border p-t-20\"  maxLength=\"150\"></TextField>\n                <TextField row=\"3\" col=\"1\" [(ngModel)]=\"gameLat\" hint=\"geo fence to latitude\" class=\"input input-border p-t-20\"  maxLength=\"150\" *ngIf=\"admin>0\"></TextField>\n                <TextField row=\"4\" col=\"1\" [(ngModel)]=\"gameLng\" hint=\"geo fence to longitude\" class=\"input input-border p-t-20\"  maxLength=\"150\" *ngIf=\"admin>0\"></TextField>\n\n                <Button row=\"5\" col='1' text=\"create bitcoin game\" (tap)=\"gCreateBTC()\" horizontalAlignment=\"stretch\" class=\"-primary p-b-20\" *ngIf=\"user\"></Button>\n                <Button row=\"5\" col='1' text=\"login/signup\" (tap)=\"login()\" horizontalAlignment=\"stretch\" class=\"-primary p-b-20\" *ngIf=\"!user\"></Button>\n\n              </GridLayout>\n          </StackLayout>\n\n          <StackLayout orientation=\"vertical\" row=\"1\" backgroundColor=\"#F1F1F1\">\n            <Label text=\"prize value: ${{btc_value*prize || 0 | number : '1.2-2'}}\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\" *ngIf=\"user\"></Label>\n\n            <Label text=\"How This works\" class=\"h2 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\"></Label>\n            <Label text=\"When you create a bitcoin game, you are offering $5 in bitcoin (for example) as a prize up for grabs. Your game will require a minimum of 10 players, with a play fee of 2 grabs (or $0.50). Like inserting quarters into an arcade. Players get x number of free grabs, slaps and sneaks to play\" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n\n            <Label text=\"10 x  $0.50 covers your $5 in bitcoin. If 20 players join the game,  there's an overage of $5. 75% of that is yours. \" class=\"h3 text-center p-t-20\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n            <Label text=\"If your game is not successful, cancel it and your bitcoins are sent back to your wallet.\" class=\"h3 text-center p-t-10\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n            <Label text=\"max players 25, max prize amount $25\" class=\"h3 text-center p-t-10\" horizontalAlignment=\"stretch\" textWrap=\"true\" lineHeight=\"18\"></Label>\n\n          </StackLayout>\n\n        </GridLayout>\n      </StackLayout>\n    </GridLayout>\n\n  </GridLayout>\n</ScrollView>\n"
 
 /***/ }),
 
@@ -1073,17 +1241,33 @@ module.exports = ".home-panel{\n    vertical-align: center;\n    font-size: 20;\
 
 /***/ }),
 
-/***/ 87:
+/***/ 435:
+/***/ (function(module, exports) {
+
+module.exports = "<ActionBar title=\"Grabbit\" class=\"h1\">\n\n</ActionBar>\n<GridLayout rows=\"*,*\" columns=\"*\">\n  <ScrollView orientation=\"vertical\">\n    <GridLayout rows=\"*,*,*,*,*,*,*\" columns=\"*\">\n      <StackLayout orientation=\"vertical\" row=\"0\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"Business Profile\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n\n      <StackLayout row=\"1\">\n\n          <GridLayout class=\"anim-cover\" rows=\"auto,auto,auto\" columns=\"*\">\n              <Image row=\"0\" col=\"0\" marginTop=\"-40\" height=\"180\" stretch=\"aspectFill\"\n                  class=\"card-img\" [src]=\"BIZ[0].profile[0].images[0].url\"></Image>\n\n                  <GridLayout class=\"anim-itemInfo p-l-4\" marginTop=\"15\" row=\"1\"\n                      width=\"100%\" columns=\"auto,*\" rows=\"*,*,*,*,*,*\"\n                      verticalAlignment=\"center\">\n                      <Label row=\"0\" col=\"0\" class=\"item-category\" text=\"{{BIZ[0].profile[0].name  || 'business category'}}\"></Label>\n                      <Label row=\"1\" col=\"0\" class=\"item-category\" text=\"{{BIZ[0].profile[0].address  || 'business address'}}\"></Label>\n                      <Label row=\"2\" col=\"0\" class=\"item-category\" text=\"{{BIZ[0].profile[0].phone  || 'business phone'}}\"></Label>\n                      <Label row=\"3\" col=\"0\" class=\"item-category\" text=\"{{BIZ[0].profile[0].email  || 'no email'}}\"></Label>\n\n                  </GridLayout>\n\n                  <StackLayout row=\"2\" *ngIf=\"BIZ[0].profile[0].verified<1\">\n                    <Label class=\"item-category\" text=\"we'll call your business, enter the code you receive to verify this business\" textWrap=\"true\"></Label>\n\n                    <Button text=\"verify biz\" (tap)=\"vYELP()\" horizontalAlignment=\"stretch\" class=\"-primary\"></Button>\n\n                  </StackLayout>\n          </GridLayout>\n\n      </StackLayout>\n\n      <StackLayout orientation=\"vertical\" row=\"2\" backgroundColor=\"#F1F1F1\">\n\n        <Label text=\"Redeem Prize\" class=\"h3 text-center p-t-20 p-b-20\" horizontalAlignment=\"stretch\"></Label>\n      </StackLayout>\n\n      <StackLayout orientation=\"vertical\" row=\"3\" backgroundColor=\"#F1F1F1\">\n\n        <Button text=\"Enter Code\" (tap)=\"scan()\" horizontalAlignment=\"stretch\" class=\"-primary\"></Button>\n      </StackLayout>\n\n    </GridLayout>\n    </ScrollView>\n</GridLayout>\n"
+
+/***/ }),
+
+/***/ 436:
+/***/ (function(module, exports) {
+
+module.exports = ".home-panel{\n    vertical-align: center;\n    font-size: 20;\n    margin: 15;\n}\n\n.description-label{\n    margin-bottom: 15;\n}\n\n.fa-regular {\n  font-family: 'Font Awesome 5 Free', 'fa-solid-900';\n  font-weight: 900;\n}\n.gameImage {\n    width:25%;\n    margin: 10px;\n    border:5px solid red;\n    border-radius: 500px;\n    -webkit-border-radius: 500px;\n    -moz-border-radius: 500px;\n}\n\n.textBold{\n  font-weight: bold;\n}\n\n.grab{\n  /* Oval: */\nbackground: #F25222;\nborder-radius: 500px;\ncolor:white;\nfont-weight: bold;\nwidth:100px;\nheight:200px\n}\n\n.slap{\n  /* Oval: */\nbackground: #F2226B;\nborder-radius: 500px;\ncolor:#F2F022;\nfont-weight: bold;\n\n\n}\n.sneak{\n  /* Oval: */\nbackground: #F2226B;\nborder-radius: 500px;\ncolor:#22F227;\nfont-weight: bold;\n\n\n}\n.avatars{\n  /* user: */\nbox-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);\nheight:auto;\nwidth:200px\n\n}\n"
+
+/***/ }),
+
+/***/ 51:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameProvider; });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(97);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
 
 
 
+// import 'rxjs/Rx';
+// import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 // const poster = axios.create();
 // poster.defaults.headers.post['Content-Type'] = 'application/json';
 /*
@@ -1308,6 +1492,7 @@ var GameProvider = /** @class */ (function () {
         // .catch(this.handleError);
     };
     GameProvider.prototype.login = function (number, device, lat, lng, countryCode) {
+        console.log(device);
         var DATA = {
             number: number,
             device: device,
@@ -1370,7 +1555,7 @@ var GameProvider = /** @class */ (function () {
         // .map(this.extractData)
         // .catch(this.handleError);
     };
-    GameProvider.prototype.gCREATECOUPON = function (token, user, prizeType, gameTitle, maxPlayers, prize, prize2, price, total) {
+    GameProvider.prototype.gCREATECOUPON = function (token, user, prizeType, gameTitle, maxPlayers, prize, prize2, price, total, mysteryBoxValue) {
         var DATA = {
             user: user,
             token: token,
@@ -1380,7 +1565,8 @@ var GameProvider = /** @class */ (function () {
             prize: prize,
             prize2: prize2,
             price: price,
-            total: total
+            total: total,
+            mysteryBoxValue: mysteryBoxValue
         };
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
@@ -1425,6 +1611,21 @@ var GameProvider = /** @class */ (function () {
             })
         };
         return this.http.post('https://app.grabbit.cheap/onPay', DATA, httpOptions);
+        // .map(this.extractData)
+        // .catch(this.handleError);
+    };
+    GameProvider.prototype.gREDEEM = function (token, user, code) {
+        var DATA = {
+            token: token,
+            user: user,
+            code: code
+        };
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        };
+        return this.http.post('https://app.grabbit.cheap/redeem', DATA, httpOptions);
         // .map(this.extractData)
         // .catch(this.handleError);
     };

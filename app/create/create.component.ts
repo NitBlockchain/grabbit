@@ -45,6 +45,7 @@ export class CreateComponent implements AfterViewInit {
   details: string
   gameLat: any
   gameLng: any
+  mysteryBoxValue: any
 
   token: string
   name: string
@@ -85,7 +86,7 @@ export class CreateComponent implements AfterViewInit {
       this.lng = localStorage.getString('lng')
       this.device = getUUID();
       if (isAndroid) {
-        // console.log("android")
+        console.log("this  is  an android device")
         // this.device = "android495775qafef4bi9"
 
       } else {
@@ -171,6 +172,10 @@ export class CreateComponent implements AfterViewInit {
 
       this.pop("whats the price of the  item to purchase?", "error")
 
+    } else if (this.prizeType == 'mystery box' && !this.mysteryBoxValue) {
+
+      this.pop("whats the value of the mystery box?", "error")
+
     } else if (!this.details) {
 
       this.pop("whats the prize details?", "error")
@@ -178,7 +183,7 @@ export class CreateComponent implements AfterViewInit {
     } else {
 
       let total = this.maxPlayers * this.playerFee
-      this.$game.gCREATECOUPON(this.token, this.user, this.prizeType, this.gameTitle, this.maxPlayers, this.prize, this.prize2, this.price, total)
+      this.$game.gCREATECOUPON(this.token, this.user, this.prizeType, this.gameTitle, this.maxPlayers, this.prize, this.prize2, this.price, total, this.mysteryBoxValue)
         .subscribe(
           (jordi) => {
             if (jordi.success) {
@@ -287,6 +292,11 @@ export class CreateComponent implements AfterViewInit {
         this.playerFee = 1
 
       }
+      if (prizeType == 'mystery box') {
+
+        this.playerFee = 1
+
+      }
 
       if (this.BIZ && this.BIZ.length < 1) {
 
@@ -329,7 +339,39 @@ export class CreateComponent implements AfterViewInit {
 
   }
 
+  public uploads() {
 
+    // window.addEventListener('DOMContentLoaded', () => {
+    //
+    //   const onProgress = (evt) => {
+    //     document.getElementById('progress').innerHTML = `${evt.totalPercent}%`;
+    //   };
+    //
+    //   document.querySelector('input').addEventListener('change', (event: any) => {
+    //     const files = event.target.files;
+    //     const token = {};
+    //     const cancel = document.getElementById('cancel');
+    //     const pause = document.getElementById('pause');
+    //     const resume = document.getElementById('resume');
+    //
+    //     [cancel, resume, pause].forEach((btn) => {
+    //       const id = btn.id;
+    //       btn.addEventListener('click', () => {
+    //         token[id]();
+    //       });
+    //     });
+    //
+    //     fileStack.upload(files, { onProgress }, {}, token)
+    //       .then(res => {
+    //         console.log('success: ', res)
+    //       })
+    //       .catch(err => {
+    //         console.log(err)
+    //       });
+    //   });
+    // });
+
+  }
   public takePicture() {
 
     // Camera.takePicture({ saveToGallery: false, width: 320, height: 240 }).then((picture: any) => {

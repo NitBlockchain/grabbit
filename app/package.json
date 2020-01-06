@@ -5,7 +5,7 @@
         "markingMode": "none"
     },
     "main": "main.js",
-    "name": "Grabbit",
+    "name": "grabbit.cheap",
     "version": "3.1.1",
     "dependencies": {}
 }

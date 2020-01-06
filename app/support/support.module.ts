@@ -26,7 +26,7 @@ import { SupportComponent } from "./support.component";
     NativeScriptFormsModule
   ],
   declarations: [
-    SupportComponent
+    //SupportComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

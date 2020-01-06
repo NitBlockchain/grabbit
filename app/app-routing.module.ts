@@ -7,6 +7,7 @@ import { CreateBusinessComponent } from "./create-business/create-business.compo
 import { HomeComponent } from "./home/home.component"
 import { SupportComponent } from "./support/support.component"
 import { LegalsComponent } from "./legals/legals.component"
+import { ProfileBusinessComponent } from "./profile-business/profile-business.component"
 const routes: Routes = [
   { path: "", redirectTo: "/home", pathMatch: "full" },
   { path: "home", loadChildren: () => import("./home/home.module").then(m => m.HomeModule) },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: "create/:type", component: CreateComponent },
   { path: "create-business", component: CreateBusinessComponent },
   { path: "support", component: SupportComponent },
-  { path: "legals/:type", component: LegalsComponent }
+  { path: "legals/:type", component: LegalsComponent },
+  { path: "profile-business", component: ProfileBusinessComponent }
 
 ];
 

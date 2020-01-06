@@ -1,6 +1,6 @@
 import { NgModule, NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-import { HttpModule } from '@angular/http';
+// import { HttpModule } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { AppComponent } from "./app.component";
 import * as geolocation from "nativescript-geolocation";
@@ -13,6 +13,7 @@ import { CreateComponent } from "./create/create.component"
 import { CreateBusinessComponent } from "./create-business/create-business.component"
 import { SupportComponent } from "./support/support.component"
 import { LegalsComponent } from "./legals/legals.component"
+import { ProfileBusinessComponent } from "./profile-business/profile-business.component"
 import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
     CreateComponent,
     CreateBusinessComponent,
     SupportComponent,
-    LegalsComponent
+    LegalsComponent,
+    ProfileBusinessComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

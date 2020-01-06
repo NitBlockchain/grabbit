@@ -26,7 +26,7 @@ import { LegalsComponent } from "./legals.component";
     NativeScriptFormsModule
   ],
   declarations: [
-    LegalsComponent
+    //LegalsComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

@@ -26,7 +26,7 @@ import { CreateComponent } from "./create.component";
     NativeScriptFormsModule
   ],
   declarations: [
-    CreateComponent
+    //CreateComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA
