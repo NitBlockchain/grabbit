@@ -16,7 +16,6 @@ import { AbsoluteLayout } from "tns-core-modules/ui/layouts/absolute-layout";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import * as TNSPhone from 'nativescript-phone';
 
-import { getUUID } from 'nativescript-uuid';
 const localStorage = require("tns-core-modules/application-settings");
 import { GameProvider } from '../services/game';
 import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
@@ -122,6 +121,10 @@ export class HomeComponent implements AfterViewInit {
   playersMax: string
 
   device: any
+  deviceModel: any
+  deviceManufacturer: any
+  isIOS: boolean
+  isAndroid: boolean
   admin: any
 
   playersHeight: any
@@ -161,6 +164,7 @@ export class HomeComponent implements AfterViewInit {
   ngAfterViewInit(): void {
 
     this.initializeTabBar();
+
     // this.geo()
     // this.bGeo()
 
@@ -202,7 +206,8 @@ export class HomeComponent implements AfterViewInit {
       geolocation.getCurrentLocation({
         desiredAccuracy: Accuracy.high,
         maximumAge: 5000,
-        timeout: 10000
+        timeout: 10000,
+        iosAllowsBackgroundLocationUpdates: true
       }).then((loc: any) => {
         if (loc) {
 
@@ -242,8 +247,13 @@ export class HomeComponent implements AfterViewInit {
     this.lat = localStorage.getString('lat')
     this.lng = localStorage.getString('lng')
     // this.device = 'afkehofahoufhep'
-    // console.log('device is' + this.device)
-    this.device = getUUID();
+
+    this.device = device.uuid
+    this.deviceManufacturer = device.manufacturer
+    this.deviceModel = device.model
+    this.country = device.region
+    this.isAndroid = isAndroid
+    this.isIOS = isIOS
 
     // Telephony().then((resolved: any) => {
     //
@@ -267,22 +277,19 @@ export class HomeComponent implements AfterViewInit {
     if (this.user) {
       console.log("got user id stored")
       this.gUSER()
-      // this.bGAMES()
+      this.bGLOBALGAMES()
 
     } else {
 
       console.log("no users")
 
-      // this.bGAMES()
+      this.bGLOBALGAMES()
 
     }
     if (this.lat && this.lng) {
       // console.log("got  lat")
-      this.bGLOBALGAMES()
       this.bLOCALGAMES()
     } else {
-      this.bGLOBALGAMES()
-
       // console.log("no lat")
       this.pop("getting your location", 'success')
       this.geo()
@@ -309,7 +316,7 @@ export class HomeComponent implements AfterViewInit {
               this.BIZ = jordi.payload[1]
               this.WINS = jordi.payload[2]
               this.DUSER = USER
-              console.log(USER)
+              // console.log(USER)
 
               this.name = USER.profile.name || 'no user name set'
               this.avatar = USER.profile.avatar || '~/assets/imgs/avatars/alien_02.png'
@@ -655,6 +662,7 @@ export class HomeComponent implements AfterViewInit {
   // bring local games
   bLOCALGAMES() {
 
+    console.log("getting local games")
     this.$game.bLOCALGAMES(this.token, this.user, this.lat, this.lng)
       .subscribe(
         (jordi: any) => {
@@ -668,7 +676,7 @@ export class HomeComponent implements AfterViewInit {
             })
 
           } else {
-            //no  success here check local
+            // console.log(jordi)
           }
         })
 
@@ -731,7 +739,7 @@ export class HomeComponent implements AfterViewInit {
   }
 
   onPlay() {
-    console.log(this.lat, this.lng)
+    // console.log(this.lat, this.lng)
     this.$game.play(this.token, this.user, this.$gID)
       .subscribe(
         (jordi: any) => {
@@ -891,8 +899,8 @@ export class HomeComponent implements AfterViewInit {
   // login/register
 
   login(number: string) {
-    console.log(this.lat, this.lng, this.device)
-    this.$game.login(number, this.device, this.lat, this.lng, this.countryCode)
+    // console.log(this.lat, this.lng, this.device)
+    this.$game.login(number, this.device, this.lat, this.lng, this.country, this.deviceManufacturer, this.deviceModel, isIOS, isAndroid)
       .subscribe(
         (jordi: any) => {
           if (jordi.success) {
@@ -984,7 +992,93 @@ export class HomeComponent implements AfterViewInit {
         })
   }
 
+  onPayAddress() {
 
+    this.zone.run(() => {
+
+      dialogs.prompt({
+        title: "Payout Address",
+        message: "payout address for your bitcoin wins",
+        okButtonText: "save",
+        cancelButtonText: "cancel",
+        inputType: dialogs.inputType.text
+      }).then((r) => {
+        if (r.text) {
+
+          this.onPayAddressComplete(r.text)
+
+        } else {
+          this.pop('what is payout address?', 'error')
+        }
+        // console.log("Dialog result: " + r.result + ", text: " + r.text);
+
+      });
+
+      this.cd.detectChanges();
+
+
+    })
+  }
+
+  onPayAddressComplete(address: any) {
+
+    this.$game.onPayAddress(this.token, this.user, address)
+      .subscribe(
+        (jordi: any) => {
+          if (jordi.success) {
+
+            this.pop(jordi.message, 'success')
+            this.gUSER()
+
+          } else {
+
+            this.pop(jordi.message, 'error')
+
+          }
+        })
+  }
+
+  onWithdraw(type: any) {
+
+    this.zone.run(() => {
+
+      dialogs.prompt({
+        title: "Amount To Withdraw",
+        message: "enter the amount to withdraw",
+        okButtonText: "withdraw",
+        cancelButtonText: "cancel",
+        inputType: dialogs.inputType.text
+      }).then((r) => {
+        if (r.text) {
+
+          this.$game.onWithdraw(this.token, this.user, r.text, type)
+            .subscribe(
+              (jordi: any) => {
+                if (jordi.success) {
+
+                  this.pop(jordi.message, 'success')
+                  this.gUSER()
+
+                } else {
+
+                  this.pop(jordi.message, 'error')
+
+                }
+              })
+
+        } else {
+          this.pop('what the withdraw  amount?', 'error')
+        }
+        // console.log("Dialog result: " + r.result + ", text: " + r.text);
+
+      });
+
+      this.cd.detectChanges();
+
+
+    })
+
+  }
 
   onShare() {
 
@@ -1222,6 +1316,7 @@ export class HomeComponent implements AfterViewInit {
         this.$gType = 'global'
       } else {
         this.$gType = 'local'
+        this.bLOCALGAMES()
 
       }
       this.cd.detectChanges();

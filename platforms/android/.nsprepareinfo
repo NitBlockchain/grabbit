@@ -1,8 +1,8 @@
 {
-	"time": "Sun Jan 05 2020 21:55:50 GMT-0800 (Pacific Standard Time)",
+	"time": "Wed Jan 08 2020 09:01:53 GMT-0800 (Pacific Standard Time)",
 	"nativePlatformStatus": "3",
 	"release": true,
 	"changesRequireBuild": true,
-	"projectFileHash": "555b2cf62f0baddd544dbfc38bbeaf9f7f9887388d712fad35b9f4ef1b61ecbd",
-	"changesRequireBuildTime": "Sun Jan 05 2020 21:55:50 GMT-0800 (Pacific Standard Time)"
+	"projectFileHash": "0693bf9aaf6067e09ee2de4b14afba378792579e0a543431135c172c39363dff",
+	"changesRequireBuildTime": "Wed Jan 08 2020 09:01:53 GMT-0800 (Pacific Standard Time)"
 }

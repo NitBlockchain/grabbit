@@ -124,10 +124,6 @@
         "directory": "../../node_modules/nativescript-ui-sidedrawer"
     },
     {
-        "name": "nativescript-uuid",
-        "directory": "../../node_modules/nativescript-uuid"
-    },
-    {
         "name": "tns-core-modules",
         "directory": "../../node_modules/tns-core-modules"
     },

@@ -9,7 +9,6 @@ import { GameProvider } from '../services/game';
 import { ListPicker } from "tns-core-modules/ui/list-picker";
 import { confirm } from "tns-core-modules/ui/dialogs";
 const localStorage = require("tns-core-modules/application-settings");
-import * as imagepicker from "nativescript-imagepicker";
 import { isAndroid, isIOS, device, screen } from "tns-core-modules/platform";
 import { ImageFormat } from "ui/enums";
 import * as Camera from "nativescript-camera";

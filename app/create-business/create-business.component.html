@@ -32,19 +32,19 @@
 
     <GridLayout class="anim-cover" rows="auto,auto,auto" columns="*">
         <Image row="0" col="0" marginTop="-40" height="180" stretch="aspectFill"
-            class="card-img" [src]="BIZ[0].profile[0].images[0].url"></Image>
+            class="card-img" [src]="BIZ.profile[0].images[0].url"></Image>
 
             <GridLayout class="anim-itemInfo p-l-4" marginTop="15" row="1"
                 width="100%" columns="auto,*" rows="*,*,*,*,*,*"
                 verticalAlignment="center">
-                <Label row="0" col="0" class="item-category" text="{{BIZ[0].profile[0].name  || 'business category'}}"></Label>
-                <Label row="1" col="0" class="item-category" text="{{BIZ[0].profile[0].address  || 'business address'}}"></Label>
-                <Label row="2" col="0" class="item-category" text="{{BIZ[0].profile[0].phone  || 'business phone'}}"></Label>
-                <Label row="3" col="0" class="item-category" text="{{BIZ[0].profile[0].email  || 'no email'}}"></Label>
+                <Label row="0" col="0" class="item-category" text="{{BIZ.profile[0].name  || 'business category'}}"></Label>
+                <Label row="1" col="0" class="item-category" text="{{BIZ.profile[0].address  || 'business address'}}"></Label>
+                <Label row="2" col="0" class="item-category" text="{{BIZ.profile[0].phone  || 'business phone'}}"></Label>
+                <Label row="3" col="0" class="item-category" text="{{BIZ.profile[0].email  || 'no email'}}"></Label>
 
             </GridLayout>
 
-            <StackLayout row="2" *ngIf="BIZ[0].profile[0].verified<1">
+            <StackLayout row="2" *ngIf="BIZ.profile[0].verified<1">
               <Label class="item-category" text="we'll call your business, enter the code you receive to verify this business" textWrap="true"></Label>
 
               <Button text="verify biz" (tap)="vYELP()" horizontalAlignment="stretch" class="-primary"></Button>

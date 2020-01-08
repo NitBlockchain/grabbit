@@ -31,7 +31,7 @@
             </StackLayout>
           </GridLayout>
 
-          <GridLayout rows="*,*,*,*,*,*,*" columns="*" *ngIf="DUSER">
+          <GridLayout rows="*,*,*,*,*,*,*,*,*" columns="*" *ngIf="DUSER">
 
             <StackLayout orientation="vertical" row="0" backgroundColor="lightgray">
 
@@ -96,22 +96,39 @@
               <Label text="Bitcoin" class="h3 text-center p-t-20 p-b-20 textBold" horizontalAlignment="stretch"></Label>
             </StackLayout>
             <StackLayout orientation="vertical" row="4" class="p-t-20 p-b-20">
+              <GridLayout rows="*,*,*" columns="*,*">
+                <Label row="0" colSpan="2" text="balance: {{DUSER.wallet[0].btc[0].btc_balance}}" class="h3 text-center "></Label>
+                <Label row="1" colSpan="2" text="{{DUSER.wallet[0].btc[0].btc_address}}" class="h3 text-center "></Label>
+                <Button row="2" column="0" text="copy" (tap)="onCopy(DUSER.wallet[0].btc[0].btc_address)" class="-primary -rounded-lg" ></Button>
+                <Button row="2" column="1" text="withdraw" (tap)="onWithdraw('1')" class="-primary -rounded-lg"></Button>
 
-              <Label text="balance: {{DUSER.wallet[0].btc[0].btc_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
-              <Label text="{{DUSER.wallet[0].btc[0].btc_address}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
-              <Button text="copy" (tap)="onCopy(DUSER.wallet[0].btc[0].btc_address)" class="-primary -rounded-lg"></Button>
+              </GridLayout>
             </StackLayout>
-            <StackLayout orientation="vertical" row="5" backgroundColor="#F1F1F1" verticalAlignment="middle">
+            <StackLayout orientation="vertical" row="5" backgroundColor="#F1F1F1" verticalAlignment="middle" style="margin-bottom:60px">
+
+              <Label text="BTC WITHDRAW ADDRESS" class="h3 text-center p-t-20 p-b-20 textBold" horizontalAlignment="stretch"></Label>
+            </StackLayout>
+            <StackLayout orientation="vertical" row="6" verticalAlignment="middle" style="margin-bottom:100px">
+
+              <Label text="{{DUSER.wallet[0].btc[0].pay_address ||  'N/A'}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
+              <Button text="Edit" (tap)="onPayAddress()" class="-primary -rounded-lg"></Button>
+
+            </StackLayout>
+            <StackLayout orientation="vertical" row="7" backgroundColor="#F1F1F1" verticalAlignment="middle" style="margin-bottom:60px">
 
               <Label text="OWO" class="h3 text-center p-t-20 p-b-20 textBold" horizontalAlignment="stretch"></Label>
             </StackLayout>
-            <StackLayout orientation="vertical" row="6" verticalAlignment="middle" style="margin-bottom:200px">
+            <StackLayout orientation="vertical" row="8" verticalAlignment="middle" style="margin-bottom:600px">
+              <GridLayout rows="*,*,*" columns="*,*">
 
-              <Label text="balance: {{DUSER.wallet[0].owo[0].owo_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
-              <Label text="{{DUSER.wallet[0].owo[0].owo_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
-              <Button text="copy" (tap)="onCopy($event)" class="-primary -rounded-lg"></Button>
+              <Label row="0" colSpan="2" text="balance: {{DUSER.wallet[0].owo[0].owo_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
+              <Label row="1" colSpan="2" text="{{DUSER.wallet[0].owo[0].owo_address}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
+              <Button row="2" col="0" text="copy" (tap)="onCopy($event)" class="-primary -rounded-lg"></Button>
+              <Button row="2" column="1" text="withdraw" (tap)="onWithdraw('2')" class="-primary -rounded-lg"></Button>
 
+              </GridLayout>
             </StackLayout>
+            
 
           </GridLayout>
         </ScrollView>
@@ -138,7 +155,7 @@
               </Card:CardView>
             </StackLayout>
 
-            <StackLayout class="p-20" row="2"  style="margin-bottom:99px">
+            <StackLayout class="p-20" row="2">
               <Card:CardView class="cardStyle">
                 <StackLayout class="cardContent">
                   <Label text="Create grabbit games for bitcoin" class="m-b-10 h3" />
@@ -148,6 +165,9 @@
 
                 </StackLayout>
               </Card:CardView>
+            </StackLayout>
+            <StackLayout class="p-20" row="3"  style="margin-bottom:399px">
+                  <Button text="close" (tap)="showCreate=false" class="-primary -rounded-lg"></Button>
             </StackLayout>
 
           </GridLayout>
@@ -185,14 +205,25 @@
             </StackLayout>
 
             <StackLayout row="1" *ngIf="$gType=='local' && LOCALGAMES && LOCALGAMES.length>0">
-              <ListView class="list-group" #list [items]="LOCALGAMES" dock="top" height="100%">
-                <ng-template let-item="item">
-                  <GridLayout class="list-group-item" rows="*" columns="auto, *">
-                    <Image row="0" col="0" [src]="item.details.images[0].url" class="thumb img-circle" (tap)="setGameId(item.game)"></Image>
-                    <Label row="0" col="1" [text]="item.details.title" (tap)="setGameId(item.game)"></Label>
+              <CardView *ngFor="let data of LOCALGAMES" (tap)="setGameId(data.game)">
+                <StackLayout orientation="horizontal" margin="12" class="text-center" *ngIf="data.user_id!=user_id">
+                  <GridLayout rows="*,*,*" columns="*">
+                    <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
+                    <Label row="1" col="0" [text]="data.details.prizeType" class="h4 text-center"></Label>
+                    <Label row="2" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
+
                   </GridLayout>
-                </ng-template>
-              </ListView>
+                </StackLayout>
+                <StackLayout orientation="horizontal" margin="12" class="text-center" backgroundColor="#F1F1F1" *ngIf="data.user_id==user_id">
+                  <GridLayout rows="*,*,*" columns="*">
+                    <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
+                    <Label row="1" col="0" [text]="data.details.prizeType" class="h4 text-center"></Label>
+                    <Label row="2" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
+
+                  </GridLayout>
+                </StackLayout>
+
+              </CardView>
 
             </StackLayout>
 

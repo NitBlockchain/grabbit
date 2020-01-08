@@ -15,7 +15,6 @@ import { ImageFormat } from "ui/enums";
 import * as Camera from "nativescript-camera";
 import * as Toast from "nativescript-toast";
 import * as dialogs from "tns-core-modules/ui/dialogs";
-import { getUUID } from 'nativescript-uuid';
 
 @Component({
   selector: "Create",
@@ -84,7 +83,6 @@ export class CreateComponent implements AfterViewInit {
       this.user = localStorage.getString('user')
       this.lat = localStorage.getString('lat')
       this.lng = localStorage.getString('lng')
-      this.device = getUUID();
       if (isAndroid) {
         console.log("this  is  an android device")
         // this.device = "android495775qafef4bi9"
@@ -131,12 +129,14 @@ export class CreateComponent implements AfterViewInit {
 
               this.name = USER.profile.name || 'no user name set'
               this.avatar = USER.profile.avatar || '~/assets/imgs/avatars/alien_02.png'
-              this.admin = USER.profile.admin
+              this.admin = USER.admin
 
               this.cd.detectChanges();
 
             })
           } else {
+
+            console.log('error')
 
             this.zone.run(() => {
 

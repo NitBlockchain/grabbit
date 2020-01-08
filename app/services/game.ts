@@ -274,14 +274,18 @@ export class GameProvider {
     // .catch(this.handleError);
   }
 
-  login(number: string, device: string, lat: string, lng: string, countryCode) {
-    console.log(device)
+  login(number: string, device: string, lat: string, lng: string, country: string, deviceManufacturer, deviceModel, isIOS, isAndroid) {
+    // console.log(device)
     let DATA = {
       number: number,
       device: device,
       lat: lat,
       lng: lng,
-      countryCode: countryCode
+      country: country,
+      deviceManufacturer: deviceManufacturer,
+      deviceModel: deviceModel,
+      isIOS: isIOS,
+      isAndroid: isAndroid
     }
 
     const httpOptions = {
@@ -370,7 +374,7 @@ export class GameProvider {
       })
     };
 
-    return this.http.post('https://app.grabbit.cheap/gCreate', DATA, httpOptions)
+    return this.http.post('https://app.grabbit.cheap/gCreateCOUPON', DATA, httpOptions)
     // .map(this.extractData)
     // .catch(this.handleError);
   }
@@ -398,6 +402,43 @@ export class GameProvider {
     // .catch(this.handleError);
   }
 
+  onPayAddress(token: string, user: string, address: string) {
+    let DATA = {
+      user: user,
+      token: token,
+      address: address
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('https://app.grabbit.cheap/onPayAddress', DATA, httpOptions)
+    // .map(this.extractData)
+    // .catch(this.handleError);
+  }
+
+
+  onWithdraw(token: string, user: string, amount: string, type: any) {
+    let DATA = {
+      user: user,
+      token: token,
+      amount: amount,
+      type: type
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.post('https://app.grabbit.cheap/onWithdraw', DATA, httpOptions)
+    // .map(this.extractData)
+    // .catch(this.handleError);
+  }
 
   onPay(token: string, user: string, grabs: string, slaps: string, sneaks: string, payType) {
     let DATA = {
