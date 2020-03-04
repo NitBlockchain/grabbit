@@ -4,8 +4,5 @@
         "forceLog": true,
         "markingMode": "none"
     },
-    "main": "bundle",
-    "name": "grabbit.cheap",
-    "version": "3.1.1",
-    "dependencies": {}
+    "main": "bundle"
 }

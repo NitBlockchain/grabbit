@@ -58,7 +58,7 @@
           <TextField row="3" col="1" [(ngModel)]="prize" hint="winner gets a.." class="input input-border p-t-20" maxLength="45"></TextField>
 
           <TextField row="4" col="1" [(ngModel)]="prize2" hint="none winners get a 10% off coupon" class="input input-border p-t-20" maxLength="45" *ngIf="prizeType=='everyone wins'"></TextField>
-          <TextField row="4" col="1" [(ngModel)]="price" hint="buy $30 item" class="input input-border p-t-20"  maxLength="24" *ngIf="prizeType=='free item  with  purchase'"></TextField>
+          <TextField row="4" col="1" [(ngModel)]="price" hint="buy $30 item" class="input input-border p-t-20"  maxLength="24" *ngIf="prizeType=='free item with purchase'"></TextField>
 
           <TextField row="4" col="1" [(ngModel)]="mysteryBoxValue" hint="mystery box value ie $25" class="input input-border p-t-20"  maxLength="24" *ngIf="prizeType=='mystery box'"></TextField>
           <TextField row="5" col="1" [(ngModel)]="details" hint="prize details with redeem/pickup info" class="input input-border p-t-20"  maxLength="150"></TextField>
@@ -151,7 +151,7 @@
                 <Label text="Free item with purchase" class="m-b-10 h3" />
                 <Label text="winner gets a free item, with purchase" class="m-b-10 h3" textWrap="true" />
                 <Label text="$1 per player" class="m-b-10 h3" />
-                <Button text="create" (tap)="onCreate('free item  with  purchase')" class="-primary -rounded-lg"></Button>
+                <Button text="create" (tap)="onCreate('free item with purchase')" class="-primary -rounded-lg"></Button>
 
               </StackLayout>
             </Card:CardView>

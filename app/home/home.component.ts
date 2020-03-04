@@ -6,7 +6,6 @@ import { SelectedIndexChangedEventData } from "tns-core-modules/ui/tab-view";
 import * as geolocation from "nativescript-geolocation";
 import { Accuracy } from "tns-core-modules/ui/enums"; // used to describe at what accuracy the location should be get
 import { confirm } from "tns-core-modules/ui/dialogs";
-import { Telephony } from 'nativescript-telephony';
 import { registerElement } from 'nativescript-angular/element-registry';
 import { CardView } from '@nstudio/nativescript-cardview';
 registerElement('CardView', () => CardView);
@@ -88,7 +87,7 @@ export class HomeComponent implements AfterViewInit {
   address: string
   gamesPlayed: string
   message: string
-
+  owo_value: string
   lat: string
   lng: string
 
@@ -146,6 +145,7 @@ export class HomeComponent implements AfterViewInit {
 
   math = Math
   countryCode: any
+  watchId: any
 
   constructor(private http: HttpClient, public _game: GameProvider, private zone: NgZone, private cd: ChangeDetectorRef, private router: RouterExtensions, private page: Page) {
 
@@ -165,7 +165,7 @@ export class HomeComponent implements AfterViewInit {
 
     this.initializeTabBar();
 
-    // this.geo()
+    this.geo()
     // this.bGeo()
 
   }
@@ -187,6 +187,14 @@ export class HomeComponent implements AfterViewInit {
 
             console.log("Unable to Enable Your Device Location", ex);
           });
+        } else {
+          // console.log("enabled")
+          this.bGeo()
+          setTimeout(() => {
+
+            this.startWatchingLocation()
+
+          }, 5000)
         }
       }, (e) => {
 
@@ -202,7 +210,7 @@ export class HomeComponent implements AfterViewInit {
 
     this.zone.run(() => {
 
-      console.log("bGeo  reached")
+      // console.log("bGeo  reached")
       geolocation.getCurrentLocation({
         desiredAccuracy: Accuracy.high,
         maximumAge: 5000,
@@ -222,20 +230,38 @@ export class HomeComponent implements AfterViewInit {
         } else {
 
           this.bGLOBALGAMES()
-          this.pop('unable to get your location, local games won\'t be available', 'errors')
+          // this.pop('unable to get your location, local games won\'t be available', 'errors')
 
           // this.bGAMES()
 
         }
       }, (e) => {
 
-        this.pop('unable to get your location, local games won\'t be available', 'errors')
+        // this.pop('unable to get your location, local games won\'t be available', 'errors')
 
       });
       this.cd.detectChanges();
 
     })
 
+  }
+
+  public startWatchingLocation() {
+    this.watchId = geolocation.watchLocation((location: any) => {
+      if (location) {
+        this.zone.run(() => {
+          localStorage.setString('lat', JSON.stringify(location.latitude))
+          localStorage.setString('lng', JSON.stringify(location.longitude))
+
+          this.lat = JSON.stringify(location.latitude);
+          this.lng = JSON.stringify(location.longitude);
+
+          // console.log(this.lat, this.lng)
+        });
+      }
+    }, error => {
+      //  console.dump(error);
+    }, { updateDistance: 1, minimumUpdateTime: 1000 });
   }
   // --------------------------------------------------------------------
   // get stored  info
@@ -254,7 +280,7 @@ export class HomeComponent implements AfterViewInit {
     this.country = device.region
     this.isAndroid = isAndroid
     this.isIOS = isIOS
-
+    // console.log(this.country)
     // Telephony().then((resolved: any) => {
     //
     //   this.countryCode = resolved.countryCode
@@ -291,9 +317,9 @@ export class HomeComponent implements AfterViewInit {
       this.bLOCALGAMES()
     } else {
       // console.log("no lat")
-      this.pop("getting your location", 'success')
+      // this.pop("getting your location", 'success')
       this.geo()
-      this.bGeo()
+      // this.bGeo()
 
     }
 
@@ -323,11 +349,13 @@ export class HomeComponent implements AfterViewInit {
               this.wins = USER.profile.wins || 0
               this.practiceCount = USER.profile.practice || 0
               this.gamesPlayed = USER.profile.plays || 0
-              this.email = USER.profile.email || 'no email set'
+              this.email = USER.email || 'no email set'
               this.admin = USER.profile.admin
               this.btc_value = jordi.btc_value
+              this.owo_value = jordi.owoValue
               this.btc_fee_usd = jordi.btc_fee_usd
               this.cd.detectChanges();
+              // console.log(this.owo_value)
 
             })
 
@@ -633,6 +661,7 @@ export class HomeComponent implements AfterViewInit {
               this.DGAMES = jordi.payload[0]
               this.GLOBALGAMES = this.DGAMES
               this.Dgame = this.DGAMES[Math.floor(Math.random() * this.DGAMES.length)];
+              // console.log(this.Dgame)
               this.$gID = this.Dgame.game
               this.title = this.Dgame.details.title
               this.image = this.Dgame.details.images[0].url
@@ -662,13 +691,16 @@ export class HomeComponent implements AfterViewInit {
   // bring local games
   bLOCALGAMES() {
 
-    console.log("getting local games")
+    console.log("getting local games" + this.lat, this.lng)
     this.$game.bLOCALGAMES(this.token, this.user, this.lat, this.lng)
       .subscribe(
         (jordi: any) => {
           if (jordi.success) {
-            // console.log(jordi.payload)
             this.zone.run(() => {
+
+              // console.log(jordi.payload[0])
+
+              let r: any = jordi.payload[0]
 
               this.LOCALGAMES = jordi.payload[0]
               this.cd.detectChanges();
@@ -680,6 +712,12 @@ export class HomeComponent implements AfterViewInit {
           }
         })
 
+  }
+
+  PARSE(value) {
+    ///get game id
+    // console.log(JSON.parse(value))
+    return JSON.parse(value);
   }
 
   // --------------------------------------------------------------------
@@ -760,10 +798,10 @@ export class HomeComponent implements AfterViewInit {
 
               dialogs.prompt({
                 title: "Login/Signup",
-                message: "register or login securely  via sms. enter your phone number",
-                okButtonText: "send sms",
+                message: "register or login securely  via email, enter your email address",
+                okButtonText: "send email",
                 cancelButtonText: "cancel",
-                inputType: dialogs.inputType.number
+                inputType: dialogs.inputType.email
               }).then((r) => {
                 if (r.text) {
 
@@ -899,7 +937,7 @@ export class HomeComponent implements AfterViewInit {
   // login/register
 
   login(number: string) {
-    // console.log(this.lat, this.lng, this.device)
+    console.log(this.lat, this.lng, this.device, this.country)
     this.$game.login(number, this.device, this.lat, this.lng, this.country, this.deviceManufacturer, this.deviceModel, isIOS, isAndroid)
       .subscribe(
         (jordi: any) => {
@@ -919,7 +957,7 @@ export class HomeComponent implements AfterViewInit {
                   this.loginComplete(r.text)
 
                 } else {
-                  this.pop('what is  your phone number?', 'error')
+                  this.pop('what is  your email address?', 'error')
                 }
                 // console.log("Dialog result: " + r.result + ", text: " + r.text);
 
@@ -976,7 +1014,7 @@ export class HomeComponent implements AfterViewInit {
                     this.loginComplete(r.text)
 
                   } else {
-                    this.pop('what is  your phone number?', 'error')
+                    this.pop('what is  your email address?', 'error')
                   }
                   // console.log("Dialog result: " + r.result + ", text: " + r.text);
 
@@ -1160,15 +1198,15 @@ export class HomeComponent implements AfterViewInit {
         this.tabs.nativeElement.selectedIndex = index;
       }
 
-      this.centerCircle.nativeElement.animate(this.getSlideAnimation(index, duration));
-      this.leftTabs.nativeElement.animate(this.getSlideAnimation(index, duration));
-      this.rightTabs.nativeElement.animate(this.getSlideAnimation(index, duration));
-      this.centerPatch.nativeElement.animate(this.getSlideAnimation(index, duration));
-      this.dragCircle.nativeElement.animate(this.getSlideAnimation(index, duration));
+      // this.centerCircle.nativeElement.animate(this.getSlideAnimation(index, duration));
+      // this.leftTabs.nativeElement.animate(this.getSlideAnimation(index, duration));
+      // this.rightTabs.nativeElement.animate(this.getSlideAnimation(index, duration));
+      // this.centerPatch.nativeElement.animate(this.getSlideAnimation(index, duration));
+      // this.dragCircle.nativeElement.animate(this.getSlideAnimation(index, duration));
 
       // set current index to new index
       this.currentTabIndex = index;
-      // console.log(index)
+      // console.log(this.currentTabIndex, index)
 
       if (index != 2) {
 
@@ -1184,6 +1222,7 @@ export class HomeComponent implements AfterViewInit {
         }
 
         this.gUSER()
+        console.log("got user")
         this.onTimer()
 
       }

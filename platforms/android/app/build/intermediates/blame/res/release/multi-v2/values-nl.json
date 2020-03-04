@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBIT/Grabbit/platforms/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-nl/values-nl.xml",
+            "outputFile": "/Users/owoman/Documents/ProducTank/NATIVESCRIPT/GRABBITS/Grabbit/platforms/android/app/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-nl/values-nl.xml",
             "map": [
                 {
                     "source": "/Users/owoman/.gradle/caches/transforms-2/files-2.1/db97787e28cdeedd23aed438c6fb87e8/jetified-play-services-basement-11.4.0/res/values-nl/values.xml",

@@ -2018,8 +2018,8 @@
         <item name="clipToPlotArea">true</item>
     </style>
     <style name="ChartAnnotationStyle.CartesianCustomAnnotationStyle">
-        <item name="horizontalAlignment">center</item>
-        <item name="verticalAlignment">center</item>
+        <item name="cartesianHorizontalAlignment">center</item>
+        <item name="cartesianVerticalAlignment">center</item>
     </style>
     <style name="ChartAnnotationStyle.CartesianStrokedAnnotationStyle">
         <item name="strokeColor">#ff0000</item>
@@ -3824,15 +3824,15 @@
         </attr>
     </declare-styleable>
     <declare-styleable name="CartesianCustomAnnotation">
-        <attr format="float" name="horizontalOffset"/>
-        <attr format="float" name="verticalOffset"/>
-        <attr format="reference" name="content"/>
-        <attr format="enum" name="horizontalAlignment">
+        <attr format="float" name="cartesianHorizontalOffset"/>
+        <attr format="float" name="cartesianVerticalOffset"/>
+        <attr format="reference" name="cartesianContent"/>
+        <attr format="enum" name="cartesianHorizontalAlignment">
             <enum name="left" value="0"/>
             <enum name="center" value="1"/>
             <enum name="right" value="2"/>
         </attr>
-        <attr format="enum" name="verticalAlignment">
+        <attr format="enum" name="cartesianVerticalAlignment">
             <enum name="top" value="0"/>
             <enum name="bottom" value="1"/>
             <enum name="center" value="2"/>

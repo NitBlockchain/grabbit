@@ -10,7 +10,7 @@
   <ActionItem (tap)="onReload(2)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.slaps<1 && USERINGAME.grabs>0 && USERINGAME.sneaks>0"></ActionItem>
     <ActionItem (tap)="onReload(3)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.sneaks<1 && USERINGAME.grabs>0 && USERINGAME.slaps>0"></ActionItem>
 
-  <ActionItem (tap)="onEdit()" ios.position="right" text="Edit" *ngIf="currentTabIndex==3  && user"></ActionItem>
+  <ActionItem (tap)="onEdit()" ios.position="right" text="Edit" *ngIf="currentTabIndex==3 && user"></ActionItem>
   <ActionItem (tap)="onType('local')" ios.position="right" text="Local Games" *ngIf="currentTabIndex==1 && $gType=='global'"></ActionItem>
   <ActionItem (tap)="onType('global')" ios.position="right" text="Global Games" *ngIf="currentTabIndex==1 && $gType=='local'"></ActionItem>
 </ActionBar>
@@ -55,7 +55,7 @@
               <GridLayout rows="*,*,*,*,*" columns="*">
                 <StackLayout class="input-field" row="0">
 
-                  <Label text="Buy slaps, grabs & sneaks @ $0.25 each" class="h4 text-center p-t-20" horizontalAlignment="stretch"></Label>
+                  <Label text="Buy slaps, grabs & sneaks @ $0.10 each" class="h4 text-center p-t-20" horizontalAlignment="stretch"></Label>
                 </StackLayout>
 
                 <StackLayout class="input-field" row="1">
@@ -78,8 +78,9 @@
 
                 <StackLayout orientation="vertical" row="4" backgroundColor="#F1F1F1">
 
-                  <Label text="total USD: ${{(buySlaps*.25) + (buyGrabs*.25) + (buySneaks*.25) || 0 | number : '1.2-2'}}" class="h2 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
-                  <Label text="total BTC: {{((buySlaps*.25) + (buyGrabs*.25) + (buySneaks*.25))/btc_value || 0 | number : '1.4-4'}}" class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
+                  <Label text="total USD: ${{(buySlaps*.10) + (buyGrabs*.10) + (buySneaks*.10) || 0 | number : '1.2-2'}}" class="h2 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
+                  <Label text="total BTC: {{((buySlaps*.10) + (buyGrabs*.10) + (buySneaks*.10))/btc_value || 0 | number : '1.4-4'}}" class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
+                  <Label text="total OWO: {{((buySlaps*.10) + (buyGrabs*.10) + (buySneaks*.10))/owo_value || 0 | number : '1.8-8'}}" class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
                   <Label text="1 btc = ${{btc_value}}" class="h4 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
 
                   <Label text="Most games offer you free slaps, grabs and sneaks to play with" class="h3 text-center p-t-20" horizontalAlignment="stretch" textWrap="true"></Label>
@@ -128,7 +129,7 @@
 
               </GridLayout>
             </StackLayout>
-            
+
 
           </GridLayout>
         </ScrollView>
@@ -208,17 +209,17 @@
               <CardView *ngFor="let data of LOCALGAMES" (tap)="setGameId(data.game)">
                 <StackLayout orientation="horizontal" margin="12" class="text-center" *ngIf="data.user_id!=user_id">
                   <GridLayout rows="*,*,*" columns="*">
-                    <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
-                    <Label row="1" col="0" [text]="data.details.prizeType" class="h4 text-center"></Label>
-                    <Label row="2" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
+                    <Label row="0" col="0" [text]="PARSE(data.details).title" class="h4 text-center"></Label>
+                    <Label row="1" col="0" [text]="PARSE(data.details).prizeType" class="h4 text-center"></Label>
+                    <Label row="2" col="0" text="{{PARSE(data.details).playersReady}}/{{PARSE(data.details).playersMax}} players" class="h4 text-center"></Label>
 
                   </GridLayout>
                 </StackLayout>
                 <StackLayout orientation="horizontal" margin="12" class="text-center" backgroundColor="#F1F1F1" *ngIf="data.user_id==user_id">
                   <GridLayout rows="*,*,*" columns="*">
-                    <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
-                    <Label row="1" col="0" [text]="data.details.prizeType" class="h4 text-center"></Label>
-                    <Label row="2" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
+                    <Label row="0" col="0" [text]="PARSE(data.details).title" class="h4 text-center"></Label>
+                    <Label row="1" col="0" [text]="PARSE(data.details).prizeType" class="h4 text-center"></Label>
+                    <Label row="2" col="0" text="{{PARSE(data.details).playersReady}}/{{PARSE(data.details).playersMax}} players" class="h4 text-center"></Label>
 
                   </GridLayout>
                 </StackLayout>
@@ -297,7 +298,7 @@
                 <GridLayout rows="*,*,*,*,*,*" columns="*">
                   <Label text="game info" class="createdBy text-center h4" row="0" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
                   <Label text="{{Dgame.details.info}}" class="createdBy text-center  h3" row="1" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
-                  <Label text="Free Grabs: {{Dgame.details.freeGrabs}}, Free Slaps: {{Dgame.details.freeGrabs}}, Free Sneaks: {{Dgame.details.freeSneaks}} " class="createdBy text-center h4" row="2" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
+                  <Label text="Free Grabs: {{Dgame.details.freeGrabs}}, Free Slaps: {{Dgame.details.freeSlaps}}, Free Sneaks: {{Dgame.details.freeSneaks}} " class="createdBy text-center h4" row="2" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
                   <Label text="Insert: {{Dgame.details.toPlayGrabs | number : '1.0-0'}} Grabs" class="text-center h3 textBold" row="3" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.toPlayGrabs>0"></Label>
                   <Label text="Proof Of Prize  " class="text-center h5" row="4" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.prizeType=='btc'"></Label>
                   <Label text="{{Dgame.details.btc_address}}" class="text-center h4 textBold" row="5" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.prizeType=='btc'" (tap)="onProve(Dgame.details.btc_address)"></Label>
@@ -338,7 +339,7 @@
 
             <StackLayout orientation="vertical" row="0" *ngIf="DUSER">
 
-              <Image *ngIf="name" horizontalAlignment="stretch" [src]="avatar" style="width:44%; height:auto;margin-top:33px;"></Image>
+              <Image *ngIf="name" horizontalAlignment="stretch" [src]="avatar" style="width:44%; height:auto;margin-top:33px;" (tap)="onEdit()"></Image>
               <Label [text]="name" class="h2 text-center p-t-20" horizontalAlignment="stretch"></Label>
               <Label [text]="email" class="h2 text-center" horizontalAlignment="stretch"></Label>
               <Label text="games played: {{gamesPlayed}}" class="h3 text-center" horizontalAlignment="stretch"></Label>

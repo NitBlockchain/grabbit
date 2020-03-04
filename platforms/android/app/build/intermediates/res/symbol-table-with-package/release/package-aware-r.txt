@@ -155,6 +155,11 @@ attr cardMaxElevation
 attr cardPreventCornerOverlap
 attr cardUseCompatPadding
 attr cardViewStyle
+attr cartesianContent
+attr cartesianHorizontalAlignment
+attr cartesianHorizontalOffset
+attr cartesianVerticalAlignment
+attr cartesianVerticalOffset
 attr chartZoom
 attr checkboxStyle
 attr checkedChip
@@ -214,7 +219,6 @@ attr colorSecondary
 attr colorSwitchThumbNormal
 attr combineMode
 attr commitIcon
-attr content
 attr contentDescription
 attr contentInsetEnd
 attr contentInsetEndWithActions
@@ -316,9 +320,7 @@ attr hintEnabled
 attr hintTextAppearance
 attr homeAsUpIndicator
 attr homeLayout
-attr horizontalAlignment
 attr horizontalLocation
-attr horizontalOffset
 attr hoveredFocusedTranslationZ
 attr icon
 attr iconEndPadding
@@ -645,9 +647,7 @@ attr trackTintMode
 attr ttcIndex
 attr useCompatPadding
 attr value
-attr verticalAlignment
 attr verticalLocation
-attr verticalOffset
 attr viewAspectRatio
 attr viewInflaterClass
 attr voiceIcon
@@ -2346,7 +2346,7 @@ styleable CalendarCellState state_calendar_cell_today
 styleable CalendarTheme calendarStyle
 styleable CardView android_minWidth android_minHeight cardBackgroundColor cardCornerRadius cardElevation cardMaxElevation cardPreventCornerOverlap cardUseCompatPadding contentPadding contentPaddingBottom contentPaddingLeft contentPaddingRight contentPaddingTop
 styleable CartesianAxis horizontalLocation verticalLocation
-styleable CartesianCustomAnnotation content horizontalAlignment horizontalOffset verticalAlignment verticalOffset
+styleable CartesianCustomAnnotation cartesianContent cartesianHorizontalAlignment cartesianHorizontalOffset cartesianVerticalAlignment cartesianVerticalOffset
 styleable CartesianPlotBandAnnotation fillColor
 styleable CartesianStrokedAnnotation label strokeColor strokeWidth
 styleable CategoricalAxis gapLength majorTickInterval plotMode
