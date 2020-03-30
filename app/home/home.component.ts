@@ -165,8 +165,8 @@ export class HomeComponent implements AfterViewInit {
 
     this.initializeTabBar();
 
+    this.bGeo()
     this.geo()
-    // this.bGeo()
 
   }
 
@@ -210,7 +210,7 @@ export class HomeComponent implements AfterViewInit {
 
     this.zone.run(() => {
 
-      // console.log("bGeo  reached")
+      console.log("bGeo  reached")
       geolocation.getCurrentLocation({
         desiredAccuracy: Accuracy.high,
         maximumAge: 5000,
@@ -605,7 +605,7 @@ export class HomeComponent implements AfterViewInit {
         // }, 300);
       } else if (result == 'how to play') {
 
-        this.pop("slap before you grab, sneak after you grab. Don't let  the timer hit 0, if you are not the one who grabbed the prize. If you get slapped, grab again and again and again. Send us your video explaining how to play and you could win $1,000 in bitcoin videos must be in by 12/30/2019. send youtube link to cs@grabbit.cheap, subject how to play video", 'how to play')
+        this.pop("slap before you grab, sneak after you grab. Don't let  the timer hit 0, if you are not the one who grabbed the prize. If you get slapped, grab again and again and again. Contact support cs@grabbit.cheap if you need support", 'how to play')
 
       } else if (result == 'business profile') {
 
@@ -776,9 +776,9 @@ export class HomeComponent implements AfterViewInit {
     }, 1000);
   }
 
-  onPlay() {
+  onPlay(code: any) {
     // console.log(this.lat, this.lng)
-    this.$game.play(this.token, this.user, this.$gID)
+    this.$game.play(this.token, this.user, this.$gID, code)
       .subscribe(
         (jordi: any) => {
           if (jordi.success) {
@@ -841,6 +841,33 @@ export class HomeComponent implements AfterViewInit {
 
               this.pop(jordi.message, 'error')
 
+            }
+            if (jordi.type == 4) {
+
+              this.zone.run(() => {
+
+                dialogs.prompt({
+                  title: "Private Game",
+                  message: "enter join code",
+                  okButtonText: "Play",
+                  cancelButtonText: "cancel",
+                  inputType: dialogs.inputType.text
+                }).then((r) => {
+                  if (r.text) {
+
+                    this.onPlay(r.text)
+
+                  } else {
+                    this.pop('what is the code?', 'error')
+                  }
+                  // console.log("Dialog result: " + r.result + ", text: " + r.text);
+
+                });
+
+                this.cd.detectChanges();
+
+
+              })
             }
 
           }

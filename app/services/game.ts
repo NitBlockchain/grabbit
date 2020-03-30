@@ -256,11 +256,12 @@ export class GameProvider {
     // .catch(this.handleError);
   }
 
-  play(token: any, user: any, gID: any) {
+  play(token: any, user: any, gID: any, code: any) {
     let DATA = {
       token: token,
       user: user,
       gID: gID,
+      code: code
     }
 
     const httpOptions = {

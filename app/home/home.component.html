@@ -4,11 +4,11 @@
   <ActionItem (tap)="showCreate=true" text="Create" ios.position="left" android.position="actionBar" *ngIf="currentTabIndex==1">
   </ActionItem>
 
-  <ActionItem (tap)="onPlay()" ios.position="right" text="Play" *ngIf="currentTabIndex==2  && !USERINGAME"></ActionItem>
+  <ActionItem (tap)="onPlay(0)" ios.position="right" text="Play" *ngIf="currentTabIndex==2  && !USERINGAME"></ActionItem>
   <ActionItem (tap)="onShare()" ios.position="right" text="Grab Friends" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.grabs>0"></ActionItem>
   <ActionItem (tap)="onReload(1)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.grabs<1 && USERINGAME.slaps>0 && USERINGAME.sneaks>0"></ActionItem>
   <ActionItem (tap)="onReload(2)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.slaps<1 && USERINGAME.grabs>0 && USERINGAME.sneaks>0"></ActionItem>
-    <ActionItem (tap)="onReload(3)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.sneaks<1 && USERINGAME.grabs>0 && USERINGAME.slaps>0"></ActionItem>
+  <ActionItem (tap)="onReload(3)" ios.position="right" text="Reload" *ngIf="currentTabIndex==2  && USERINGAME && USERINGAME.sneaks<1 && USERINGAME.grabs>0 && USERINGAME.slaps>0"></ActionItem>
 
   <ActionItem (tap)="onEdit()" ios.position="right" text="Edit" *ngIf="currentTabIndex==3 && user"></ActionItem>
   <ActionItem (tap)="onType('local')" ios.position="right" text="Local Games" *ngIf="currentTabIndex==1 && $gType=='global'"></ActionItem>
@@ -59,19 +59,19 @@
                 </StackLayout>
 
                 <StackLayout class="input-field" row="1">
-                  <Label row="1" col="0" text="Grabs" horizontalAlignment="left" class="label" ></Label>
+                  <Label row="1" col="0" text="Grabs" horizontalAlignment="left" class="label"></Label>
 
                   <TextField class="input" hint="How Many Grabs" [(ngModel)]="buyGrabs" keyboardType="number" autocorrect="false" maxLength="2" autocapitalizationType="none"></TextField>
                 </StackLayout>
 
                 <StackLayout class="input-field" row="2">
-                  <Label row="1" col="0" text="Slaps" horizontalAlignment="left" class="label" ></Label>
+                  <Label row="1" col="0" text="Slaps" horizontalAlignment="left" class="label"></Label>
 
                   <TextField class="input" hint="How Many Slaps" [(ngModel)]="buySlaps" keyboardType="number" autocorrect="false" maxLength="2" autocapitalizationType="none"></TextField>
                 </StackLayout>
 
                 <StackLayout class="input-field" row="3">
-                  <Label row="1" col="0" text="Sneaks" horizontalAlignment="left" class="label" ></Label>
+                  <Label row="1" col="0" text="Sneaks" horizontalAlignment="left" class="label"></Label>
 
                   <TextField class="input" hint="How Many Sneaks" [(ngModel)]="buySneaks" keyboardType="number" autocorrect="false" maxLength="2" autocapitalizationType="none"></TextField>
                 </StackLayout>
@@ -100,7 +100,7 @@
               <GridLayout rows="*,*,*" columns="*,*">
                 <Label row="0" colSpan="2" text="balance: {{DUSER.wallet[0].btc[0].btc_balance}}" class="h3 text-center "></Label>
                 <Label row="1" colSpan="2" text="{{DUSER.wallet[0].btc[0].btc_address}}" class="h3 text-center "></Label>
-                <Button row="2" column="0" text="copy" (tap)="onCopy(DUSER.wallet[0].btc[0].btc_address)" class="-primary -rounded-lg" ></Button>
+                <Button row="2" column="0" text="copy" (tap)="onCopy(DUSER.wallet[0].btc[0].btc_address)" class="-primary -rounded-lg"></Button>
                 <Button row="2" column="1" text="withdraw" (tap)="onWithdraw('1')" class="-primary -rounded-lg"></Button>
 
               </GridLayout>
@@ -122,10 +122,10 @@
             <StackLayout orientation="vertical" row="8" verticalAlignment="middle" style="margin-bottom:600px">
               <GridLayout rows="*,*,*" columns="*,*">
 
-              <Label row="0" colSpan="2" text="balance: {{DUSER.wallet[0].owo[0].owo_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
-              <Label row="1" colSpan="2" text="{{DUSER.wallet[0].owo[0].owo_address}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
-              <Button row="2" col="0" text="copy" (tap)="onCopy($event)" class="-primary -rounded-lg"></Button>
-              <Button row="2" column="1" text="withdraw" (tap)="onWithdraw('2')" class="-primary -rounded-lg"></Button>
+                <Label row="0" colSpan="2" text="balance: {{DUSER.wallet[0].owo[0].owo_balance}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
+                <Label row="1" colSpan="2" text="{{DUSER.wallet[0].owo[0].owo_address}}" class="h3 text-center " horizontalAlignment="stretch"></Label>
+                <Button row="2" col="0" text="copy" (tap)="onCopy($event)" class="-primary -rounded-lg"></Button>
+                <Button row="2" column="1" text="withdraw" (tap)="onWithdraw('2')" class="-primary -rounded-lg"></Button>
 
               </GridLayout>
             </StackLayout>
@@ -167,8 +167,8 @@
                 </StackLayout>
               </Card:CardView>
             </StackLayout>
-            <StackLayout class="p-20" row="3"  style="margin-bottom:399px">
-                  <Button text="close" (tap)="showCreate=false" class="-primary -rounded-lg"></Button>
+            <StackLayout class="p-20" row="3" style="margin-bottom:399px">
+              <Button text="close" (tap)="showCreate=false" class="-primary -rounded-lg"></Button>
             </StackLayout>
 
           </GridLayout>
@@ -273,15 +273,15 @@
             <StackLayout orientation="horizontal" class="p-t-20 text-center p-b-20" row="1" backgroundColor="#F1F1F1" verticalAlignment="middle">
               <GridLayout rows="*,*,*" columns="*,*,*" *ngIf="Dgame">
                 <Label row="0" column="0" text="{{Dgame.details.freeSlaps}}" class="h3 text-center " horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep<1"></Label>
-                <Label row="0" column="1" text="{{Dgame.details.freeGrabs}}" class="h3 text-center " horizontalAlignment="stretch"  *ngIf="Dgame.details.startPrep<1"></Label>
+                <Label row="0" column="1" text="{{Dgame.details.freeGrabs}}" class="h3 text-center " horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep<1"></Label>
                 <Label row="0" column="2" text="{{Dgame.details.freeSneaks}}" class="h3 text-center" horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep<1"></Label>
 
                 <Label row="0" column="0" text="{{USERINGAME.slaps}}" class="h3 text-center " horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep>0 && USERINGAME"></Label>
-                <Label row="0" column="1" text="{{USERINGAME.grabs}}" class="h3 text-center " horizontalAlignment="stretch"  *ngIf="Dgame.details.startPrep>0 && USERINGAME"></Label>
+                <Label row="0" column="1" text="{{USERINGAME.grabs}}" class="h3 text-center " horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep>0 && USERINGAME"></Label>
                 <Label row="0" column="2" text="{{USERINGAME.sneaks}}" class="h3 text-center" horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep>0 && USERINGAME"></Label>
 
                 <Label row="0" column="0" text="{{Dgame.details.freeSlaps}}" class="h3 text-center " horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep>0 && !USERINGAME"></Label>
-                <Label row="0" column="1" text="{{Dgame.details.freeGrabs}}" class="h3 text-center " horizontalAlignment="stretch"  *ngIf="Dgame.details.startPrep>0 && !USERINGAME"></Label>
+                <Label row="0" column="1" text="{{Dgame.details.freeGrabs}}" class="h3 text-center " horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep>0 && !USERINGAME"></Label>
                 <Label row="0" column="2" text="{{Dgame.details.freeSneaks}}" class="h3 text-center" horizontalAlignment="stretch" *ngIf="Dgame.details.startPrep>0 && !USERINGAME"></Label>
 
                 <Button row="1" column="0" text="Slap" width="100" class="slap" (tap)="onSlap()"></Button>
@@ -302,6 +302,21 @@
                   <Label text="Insert: {{Dgame.details.toPlayGrabs | number : '1.0-0'}} Grabs" class="text-center h3 textBold" row="3" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.toPlayGrabs>0"></Label>
                   <Label text="Proof Of Prize  " class="text-center h5" row="4" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.prizeType=='btc'"></Label>
                   <Label text="{{Dgame.details.btc_address}}" class="text-center h4 textBold" row="5" col="0" textWrap="true" horizontalAlignment="stretch" *ngIf="Dgame.details.prizeType=='btc'" (tap)="onProve(Dgame.details.btc_address)"></Label>
+
+                </GridLayout>
+
+              </CardView>
+            </StackLayout>
+
+            <StackLayout row="3" *ngIf="Dgame && PLAYERS.length<1">
+
+              <CardView class="cardStyle" margin="10" elevation="40" radius="1" *ngIf="Dgame && PLAYERS.length<1">
+                <GridLayout rows="*,*,*,*" columns="*" padding="20">
+                  <Label text="Auction Rules" class="createdBy text-center h4" row="0" col="0" textWrap="true" horizontalAlignment="stretch"></Label>
+                  <Label text="The objective of the Grabbit auction game is to be the last player holding the prize when the timer hits zero. Only one player will win when playing global games. To learn more, click the menu button, then click how to play" class="auctionRules" row="1" col="0"
+                    textWrap="true" horizontalAlignment="stretch"></Label>
+                  <Label text="Local games could have 1 winner, or winner brings a friend to redeem coupon, everyone wins or winner gets a free item with purchase" class="auctionRules" row="2" col="0" textWrap="true" horizontalAlignment="stretch" paddingTop="33px"></Label>
+                  <Label text="Apple is not involved in any way with the contest or sweepstakes or auction" class="apple h3" row="3" col="0" textWrap="true" horizontalAlignment="stretch" paddingTop="33px"></Label>
 
                 </GridLayout>
 
@@ -499,7 +514,7 @@
                   <GridLayout rows="*,*,*" columns="*">
                     <Label row="0" col="0" [text]="data.details.title" class="h4 text-center"></Label>
                     <Label row="1" col="0" text="{{data.details.playersReady}}/{{data.details.playersMax}} players" class="h4 text-center"></Label>
-                    <Button row="2" column="0" text="redeem" width="100" (tap)="onRedeem(data.details.qr)"  *ngIf="data.details.prizeType=='coupon' &&  data.winner.redeemed<1"></Button>
+                    <Button row="2" column="0" text="redeem" width="100" (tap)="onRedeem(data.details.qr)" *ngIf="data.details.prizeType=='coupon' &&  data.winner.redeemed<1"></Button>
 
                   </GridLayout>
                 </StackLayout>
@@ -516,7 +531,7 @@
 
                     <Label row="0" col="0" text="show this qr code to the  game host, when redeeming your win." class="h4 text-center"></Label>
                     <Image [src]="redeemQR" margin="12" col="0" row="1"></Image>
-                    <Button row="2" column="0" text="close" width="100" (tap)="showRedeem=false" ></Button>
+                    <Button row="2" column="0" text="close" width="100" (tap)="showRedeem=false"></Button>
 
                   </GridLayout>
                 </StackLayout>

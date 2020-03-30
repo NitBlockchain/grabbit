@@ -1472,11 +1472,12 @@ var GameProvider = /** @class */ (function () {
         // .map(this.extractData)
         // .catch(this.handleError);
     };
-    GameProvider.prototype.play = function (token, user, gID) {
+    GameProvider.prototype.play = function (token, user, gID, code) {
         var DATA = {
             token: token,
             user: user,
             gID: gID,
+            code: code
         };
         var httpOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({

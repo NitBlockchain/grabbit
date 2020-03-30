@@ -17,7 +17,7 @@ android {
 }
 
 def settingsGradlePath
-
+a
 if(project.hasProperty("appResourcesPath")){
     settingsGradlePath = "$project.appResourcesPath/Android/settings.gradle";
 } else {

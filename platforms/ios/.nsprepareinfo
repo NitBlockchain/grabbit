@@ -1,8 +1,8 @@
 {
-	"time": "Sun Feb 16 2020 19:29:35 GMT-0800 (Pacific Standard Time)",
+	"time": "Mon Mar 23 2020 17:28:43 GMT-0700 (Pacific Daylight Time)",
 	"nativePlatformStatus": "3",
-	"release": true,
+	"release": false,
 	"changesRequireBuild": true,
 	"projectFileHash": "3c0b3faf52deac088a1ebc4da0458a8e756dbe950729352e5af6fdd825d86e21",
-	"changesRequireBuildTime": "Sun Feb 16 2020 19:29:35 GMT-0800 (Pacific Standard Time)"
+	"changesRequireBuildTime": "Mon Mar 23 2020 17:28:43 GMT-0700 (Pacific Daylight Time)"
 }
